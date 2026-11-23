@@ -42,12 +42,14 @@ BARE_PG_PARAM_RE = re.compile(r"(?<![\\A-Za-z0-9_])\$[1-9][0-9]*(?!\s*\\)")
 
 
 def strip_fences_and_inline_code(text: str) -> str:
-    """Удаляет fenced code blocks и inline code, сохраняя номера строк примерными."""
+    """Удаляет fenced code blocks (в т. ч. внутри цитат/спойлеров `> `) и inline code."""
     out_lines = []
     in_fence = False
     fence_marker = ""
     for line in text.splitlines():
-        stripped = line.lstrip()
+        # Снимаем префикс цитаты `> ` для корректного распознавания code fences внутри [!solution]
+        unquoted = re.sub(r"^(?:\s*>\s*)+", "", line)
+        stripped = unquoted.lstrip()
         m = re.match(r"^(`{3,}|~{3,})", stripped)
         if m:
             marker = m.group(1)
@@ -63,7 +65,7 @@ def strip_fences_and_inline_code(text: str) -> str:
             out_lines.append("")
             continue
         # Удаляем inline code (`...`)
-        cleaned = re.sub(r"`[^`\n]+`", "", line)
+        cleaned = re.sub(r"`[^`\n]+`", "", unquoted)
         out_lines.append(cleaned)
     return "\n".join(out_lines)
 
