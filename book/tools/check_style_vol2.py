@@ -115,8 +115,7 @@ def check_file(path: str) -> tuple[list[str], list[str], int]:
     for idx, line in enumerate(no_code.splitlines(), 1):
         # Пропускаем строки-цитаты с > "..." (прямые цитаты или callout-маркеры)
         s = line.strip()
-        if s.startswith("> [!"):
-            s = re.sub(r"^>\s*\[![A-Za-z0-9_-]+\]", "", s)
+        s = re.sub(r"^(?:>\s*)?\[![A-Za-z0-9_-]+\]", "", s)
         # Убираем markdown-картинки ![alt](url) и != / !== / !important
         s = re.sub(r"!\[[^\]]*\]\([^)]*\)", "", s)
         s = s.replace("!=", "")
