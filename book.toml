@@ -7,7 +7,7 @@ storage_prefix = "go_textbook_v2_vol2_"
 
 [content]
 root = "sources"
-index_file = "^0+\\. "
+index_file = ""
 pages_beside_subdirs = true
 wikilinks = true
 canonical_replacements = [
@@ -98,7 +98,7 @@ catalog_sub_html = "Строго линейный маршрут обучени�
 roadmap_title_html = "Карта всей серии go-textbook-v2 (7 линейных томов)"
 roadmap_steps = [
   { badge = "Том 1", title_html = "Go и первый бэкенд", text_html = "Пролог Петцольда, Go с нуля, stdlib, базовая конкурентность, лёгкий CS/DSA и первый HTTP-сервис на JSON/файлах." },
-  { badge = "Том 2", title_html = "Базы данных", text_html = "SQL с нуля, индексы и EXPLAIN, ACID/MVCC/WAL, PostgreSQL, MySQL/InnoDB, репликация, шардирование и NoSQL." },
+  { badge = "Том 2", current = true, title_html = "Базы данных", text_html = "SQL с нуля, индексы и EXPLAIN, ACID/MVCC/WAL, PostgreSQL, MySQL/InnoDB, репликация, шардирование и NoSQL." },
   { badge = "Том 3", title_html = "Бэкенд, API, Архитектура и Брокеры", text_html = "REST/OpenAPI/gRPC, Testcontainers/CI, System Design, Clean/DDD, RabbitMQ, Kafka, NATS, Temporal, Outbox и Saga." },
   { badge = "Том 4", title_html = "Распределённые системы и Production", text_html = "CAP/PACELC, Raft/Paxos, отказоустойчивость, AppSec, Observability (Prometheus/OTel/slog), Linux, Nginx, Docker и Kubernetes." },
   { badge = "Том 5", title_html = "Под капотом и Производительность", text_html = "Компилятор Go, SSA, GMP, GC, новинки Go 1.25–1.27, глубокая архитектура CPU/Linux/сетей и профилирование pprof/trace." },
