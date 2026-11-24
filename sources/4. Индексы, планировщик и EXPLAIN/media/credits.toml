@@ -1,0 +1,67 @@
+["hdd-platters-random-io.webp"]
+# Commons: File:Seagate ST33232A hard disk inner view.jpg; лицензия там: CC BY-SA 3.0
+caption = "Жёсткий диск HDD без крышки: механический подвод головки к дорожке объясняет миллисекундные задержки случайного доступа и выбор страниц B+ Tree"
+alt = "Внутреннее устройство жёсткого диска HDD с магнитными пластинами и головкой"
+author = "Eric Gaba (Sting - fr:Sting) Это изображение было создано с помощью CombineZM участником 11 (11 pics combination.)."
+license = "CC BY-SA 3.0"
+license_url = "https://creativecommons.org/licenses/by-sa/3.0"
+source = "https://commons.wikimedia.org/wiki/File:Seagate_ST33232A_hard_disk_inner_view.jpg"
+modified = "уменьшено до 1200 px по длинной стороне, WebP (качество 80)"
+
+["nvme-m2-ssd.webp"]
+# Commons: File:NVMe SSd.jpg; лицензия там: CC0
+caption = "Твердотельный накопитель NVMe M.2: отсутствие механики сближает стоимость случайного и последовательного чтения в настройках планировщика"
+alt = "Накопитель NVMe SSD формата M.2"
+author = "User5515"
+license = "CC0"
+license_url = "http://creativecommons.org/publicdomain/zero/1.0/deed.en"
+source = "https://commons.wikimedia.org/wiki/File:NVMe_SSd.jpg"
+modified = "WebP (качество 80)"
+
+["cover-module-04-indexes-explain.svg"]
+# Инженерная обложка MOD 04 Тома 2 (8 КБ)
+caption = "Инженерная карта Модуля 4: дерево B+ Tree с высоким fanout, выбор Cost-Based Optimizer и чтение планов EXPLAIN (ANALYZE, BUFFERS)"
+alt = "Инженерный чертёж Модуля 4: структура B+ Tree, покрывающие и частичные индексы, EXPLAIN ANALYZE и алгоритмы JOIN"
+author = "Серия go-textbook-v2"
+license = "own"
+invert_dark = true
+
+["pg-btree-8kb-page.svg"]
+# Техническая SVG-схема Тома 2 (1040×460, 6.4 КБ)
+caption = "Внутренняя разметка 8-килобайтной страницы B+ Tree: PageHeaderData, ItemIdData, свободное пространство, Items и BTPageOpaqueData"
+alt = "Схема 8-КБ страницы B+ Tree в PostgreSQL с заголовком, массивом ItemId, кортежами и High Key"
+author = "Серия go-textbook-v2"
+license = "own"
+invert_dark = true
+
+["btree-page-split-steps.svg"]
+# Техническая SVG-схема Тома 2 (1040×450, 6.2 КБ)
+caption = "Пошаговая схема Page Split: переполнение листа, аллокация новой страницы, перенос половины ключей и вставка разделителя в родителя"
+alt = "Пошаговая диаграмма расщепления переполненной страницы B+ Tree при вставке случайного ключа"
+author = "Серия go-textbook-v2"
+license = "own"
+invert_dark = true
+
+["composite-index-left-prefix.svg"]
+# Техническая SVG-схема Тома 2 (1040×440, 5.3 КБ)
+caption = "Раскладка составного индекса (account_id, created_at DESC) и правило порядка столбцов Equality → Sort → Range"
+alt = "Схема сортировки составного индекса по левому префиксу и правило ESR"
+author = "Серия go-textbook-v2"
+license = "own"
+invert_dark = true
+
+["explain-analyze-buffers-output.svg"]
+# Техническая SVG-схема Тома 2 (1040×460, 4.6 КБ)
+caption = "Разбор реального вывода EXPLAIN (ANALYZE, BUFFERS): сравнение cost, actual time, rows, shared hit/read и Heap Fetches"
+alt = "Терминальный план EXPLAIN ANALYZE BUFFERS: сравнение Seq Scan и Index-Only Scan"
+author = "Серия go-textbook-v2"
+license = "own"
+invert_dark = true
+
+["join-algorithms-comparison.svg"]
+# Техническая SVG-схема Тома 2 (1040×440, 5.8 КБ)
+caption = "Сравнение Nested Loop Join, Hash Join (с риском spill на диск при нехватке work_mem) и Merge Join"
+alt = "Сравнение алгоритмов физического соединения таблиц Nested Loop, Hash Join и Merge Join"
+author = "Серия go-textbook-v2"
+license = "own"
+invert_dark = true

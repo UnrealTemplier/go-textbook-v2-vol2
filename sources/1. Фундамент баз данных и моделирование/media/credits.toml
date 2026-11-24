@@ -1,0 +1,51 @@
+["ibm-350-ramac.webp"]
+# Commons: File:IBM 350 RAMAC.jpg; лицензия там: CC BY-SA 2.5
+caption = "IBM 350 RAMAC (1956) — первый коммерческий накопитель на магнитных дисках объёмом 5 МБ, открывший эпоху дисковых баз данных"
+alt = "Исторический дисковый накопитель IBM 350 RAMAC 1956 года"
+author = "vnunet.com"
+license = "CC BY-SA 2.5"
+license_url = "https://creativecommons.org/licenses/by-sa/2.5"
+source = "https://commons.wikimedia.org/wiki/File:IBM_350_RAMAC.jpg"
+modified = "WebP (качество 80)"
+
+["ibm-punch-card.webp"]
+# Commons: File:IBM 1130 DUP control card.png; лицензия там: CC BY-SA 4.0
+caption = "Перфокарта IBM: фиксированные колонки и жёсткий табличный формат предшествовали реляционной модели Кодда"
+alt = "Перфокарта IBM с размеченными колонками полей"
+author = "Peter Flass"
+license = "CC BY-SA 4.0"
+license_url = "https://creativecommons.org/licenses/by-sa/4.0"
+source = "https://commons.wikimedia.org/wiki/File:IBM_1130_DUP_control_card.png"
+modified = "WebP (качество 80)"
+
+["cover-module-01-modeling.svg"]
+# Инженерная обложка MOD 01 Тома 2 (8 КБ)
+caption = "Инженерная карта Модуля 1: от аномалий и трёхзначной логики NULL к нормализованной ER-схеме LedgerPulse в project/step01/"
+alt = "Инженерный чертёж Модуля 1: реляционная модель, нормализация 1NF-3NF, ограничения целостности и таблицы LedgerPulse"
+author = "Серия go-textbook-v2"
+license = "own"
+invert_dark = true
+
+["object-graph-vs-relational-sets.svg"]
+# Техническая SVG-схема Тома 2 (1040×460, 6.0 КБ)
+caption = "Сравнение объектного графа (навигация по ссылкам) и реляционных таблиц (множества кортежей в 8-КБ страницах)"
+alt = "Сравнение объектного графа в памяти приложения и реляционных таблиц с внешними ключами в СУБД"
+author = "Серия go-textbook-v2"
+license = "own"
+invert_dark = true
+
+["normalization-1nf-2nf-3nf.svg"]
+# Техническая SVG-схема Тома 2 (1040×460, 6.2 КБ)
+caption = "Эволюция таблицы от 0NF/1NF к 2NF и 3NF с устранением аномалий вставки, обновления и удаления"
+alt = "Схема перехода таблицы через первую, вторую и третью нормальные формы"
+author = "Серия go-textbook-v2"
+license = "own"
+invert_dark = true
+
+["ledgerpulse-er-schema.svg"]
+# Техническая SVG-схема Тома 2 (1040×460, 5.8 КБ)
+caption = "ER-диаграмма финансового ядра LedgerPulse: таблицы accounts, transactions и ledger_entries с кардинальностями 1:N"
+alt = "ER-схема таблиц accounts, transactions и ledger_entries проекта LedgerPulse"
+author = "Серия go-textbook-v2"
+license = "own"
+invert_dark = true

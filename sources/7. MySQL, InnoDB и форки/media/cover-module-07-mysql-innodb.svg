@@ -1,0 +1,108 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="675" viewBox="0 0 1200 675">
+  <defs>
+    <pattern id="minorGrid" width="25" height="25" patternUnits="userSpaceOnUse">
+      <path d="M 25 0 L 0 0 0 25" fill="none" stroke="#e2e8f0" stroke-width="0.8"/>
+    </pattern>
+    <pattern id="majorGrid" width="125" height="125" patternUnits="userSpaceOnUse">
+      <rect width="125" height="125" fill="url(#minorGrid)"/>
+      <path d="M 125 0 L 0 0 0 125" fill="none" stroke="#cbd5e1" stroke-width="1.4"/>
+    </pattern>
+    <marker id="arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M 0 1.5 L 8 5 L 0 8.5 z" fill="#1e293b"/>
+    </marker>
+    <marker id="arrowBlue" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M 0 1.5 L 8 5 L 0 8.5 z" fill="#0369a1"/>
+    </marker>
+    <marker id="arrowOrange" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M 0 1.5 L 8 5 L 0 8.5 z" fill="#c2410c"/>
+    </marker>
+  </defs>
+  <style>
+    .bg { fill: #fcfaf5; }
+    .frame { fill: none; stroke: #1e293b; stroke-width: 2.5; }
+    .inner-frame { fill: none; stroke: #475569; stroke-width: 1; }
+    .box { fill: #ffffff; stroke: #1e293b; stroke-width: 2; }
+    .box-accent { fill: #f0f9ff; stroke: #0369a1; stroke-width: 2.2; }
+    .box-warm { fill: #fff7ed; stroke: #c2410c; stroke-width: 2.2; }
+    .box-dark { fill: #f1f5f9; stroke: #334155; stroke-width: 2; }
+    .line { fill: none; stroke: #1e293b; stroke-width: 2.2; }
+    .line-blue { fill: none; stroke: #0369a1; stroke-width: 2.4; }
+    .line-orange { fill: none; stroke: #c2410c; stroke-width: 2.4; }
+    .line-dash { fill: none; stroke: #64748b; stroke-width: 1.6; stroke-dasharray: 6 4; }
+    .title { font-family: "JetBrains Mono", "Fira Code", monospace; font-size: 23px; font-weight: 700; fill: #0f172a; }
+    .sub { font-family: "Inter", "IBM Plex Sans", sans-serif; font-size: 15px; fill: #334155; }
+    .mono { font-family: "JetBrains Mono", "Fira Code", monospace; font-size: 14px; fill: #0f172a; }
+    .mono-bold { font-family: "JetBrains Mono", "Fira Code", monospace; font-size: 15px; font-weight: 700; fill: #0f172a; }
+    .mono-blue { font-family: "JetBrains Mono", "Fira Code", monospace; font-size: 14px; font-weight: 700; fill: #0369a1; }
+    .mono-orange { font-family: "JetBrains Mono", "Fira Code", monospace; font-size: 14px; font-weight: 700; fill: #c2410c; }
+    .label { font-family: "Inter", "IBM Plex Sans", sans-serif; font-size: 13px; fill: #475569; }
+    .stamp { font-family: "JetBrains Mono", "Fira Code", monospace; font-size: 11px; fill: #475569; letter-spacing: 0.5px; }
+  </style>
+  <rect width="1200" height="675" class="bg"/>
+  <rect x="25" y="25" width="1150" height="625" fill="url(#majorGrid)"/>
+  <rect x="25" y="25" width="1150" height="625" class="frame"/>
+  <rect x="31" y="31" width="1138" height="613" class="inner-frame"/>
+
+  <rect x="60" y="135" width="530" height="235" rx="6" class="box"/>
+  <text x="85" y="165" class="mono-blue">INNODB: КЛАСТЕРНЫЙ PK И ВТОРИЧНЫЙ ИНДЕКС (16 КБ)</text>
+  <rect x="85" y="188" width="225" height="158" class="box-accent"/>
+  <text x="197" y="214" text-anchor="middle" class="mono-blue">Вторичный индекс</text>
+  <text x="197" y="242" text-anchor="middle" class="mono">(account_id) → PK</text>
+  <text x="197" y="268" text-anchor="middle" class="label">Хранит Primary Key,</text>
+  <text x="197" y="288" text-anchor="middle" class="label">а не физический адрес</text>
+  <text x="197" y="318" text-anchor="middle" class="mono-orange">Change Buffer</text>
+  <line x1="310" y1="265" x2="345" y2="265" class="line-orange" marker-end="url(#arrowOrange)"/>
+  <rect x="348" y="188" width="220" height="158" class="box-warm"/>
+  <text x="458" y="214" text-anchor="middle" class="mono-orange">Clustered PK Index</text>
+  <text x="458" y="242" text-anchor="middle" class="mono">PK → Вся строка</text>
+  <text x="458" y="268" text-anchor="middle" class="label">Двойной поиск при</text>
+  <text x="458" y="288" text-anchor="middle" class="label">отсутствии покрытия</text>
+  <text x="458" y="318" text-anchor="middle" class="mono-bold">Doublewrite + Redo</text>
+
+  <rect x="620" y="135" width="520" height="235" rx="6" class="box"/>
+  <text x="645" y="165" class="mono-blue">ТРАНЗАКЦИИ И РЕПЛИКАЦИЯ MYSQL 8.0</text>
+  <rect x="645" y="188" width="225" height="72" class="box-dark"/>
+  <text x="757" y="213" text-anchor="middle" class="mono-bold">Undo Log (MVCC)</text>
+  <text x="757" y="234" text-anchor="middle" class="label">In-place update + откат версий</text>
+  <rect x="890" y="188" width="225" height="72" class="box-warm"/>
+  <text x="1002" y="213" text-anchor="middle" class="mono-orange">Gap &amp; Next-Key Locks</text>
+  <text x="1002" y="234" text-anchor="middle" class="label">Защита от Phantom Read</text>
+  <rect x="645" y="276" width="470" height="70" class="box-accent"/>
+  <text x="880" y="303" text-anchor="middle" class="mono-blue">Внутренний 2PC: Redo Log ↔ Binlog + GTID</text>
+  <text x="880" y="324" text-anchor="middle" class="label">Потоковая, Semi-Sync (AFTER_SYNC) и Group Replication</text>
+
+  <rect x="60" y="395" width="1080" height="170" rx="6" class="box"/>
+  <text x="85" y="425" class="mono-bold">СРАВНЕНИЕ С POSTGRESQL И ЭКОСИСТЕМА ФОРКОВ</text>
+  <rect x="85" y="446" width="245" height="98" class="box-accent"/>
+  <text x="207" y="472" text-anchor="middle" class="mono-blue">PostgreSQL vs MySQL</text>
+  <text x="207" y="496" text-anchor="middle" class="label">Heap + VACUUM против</text>
+  <text x="207" y="516" text-anchor="middle" class="label">Clustered PK + Undo</text>
+  <rect x="355" y="446" width="245" height="98" class="box-dark"/>
+  <text x="477" y="472" text-anchor="middle" class="mono-bold">Percona Server</text>
+  <text x="477" y="496" text-anchor="middle" class="label">XtraBackup без блокировки,</text>
+  <text x="477" y="516" text-anchor="middle" class="label">pt-online-schema-change</text>
+  <rect x="625" y="446" width="240" height="98" class="box-dark"/>
+  <text x="745" y="472" text-anchor="middle" class="mono-bold">MariaDB</text>
+  <text x="745" y="496" text-anchor="middle" class="label">Aria, MyRocks, Galera</text>
+  <text x="745" y="516" text-anchor="middle" class="label">и расхождение ветвей</text>
+  <rect x="890" y="446" width="225" height="98" class="box-warm"/>
+  <text x="1002" y="472" text-anchor="middle" class="mono-orange">Aurora · AliDB · Vitess</text>
+  <text x="1002" y="496" text-anchor="middle" class="label">Отдельный Storage 4/6 AZ</text>
+  <text x="1002" y="516" text-anchor="middle" class="label">и шардирование VTGate</text>
+
+  <rect x="31" y="31" width="1138" height="68" fill="#f8fafc" stroke="#1e293b" stroke-width="1.5"/>
+  <rect x="31" y="31" width="135" height="68" fill="#0369a1"/>
+  <text x="98" y="72" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="22" font-weight="700" fill="#ffffff">MOD 07</text>
+  <text x="188" y="61" class="title">MYSQL, ДВИЖОК INNODB И ОБЛАЧНЫЕ ФОРКИ</text>
+  <text x="188" y="84" class="sub">9 глав: потоки ОС, кластерный индекс, Redo/Undo Log, Gap &amp; Next-Key Locks, Binlog/GTID, Percona, MariaDB и Vitess</text>
+
+  <rect x="775" y="592" width="394" height="52" fill="#f8fafc" stroke="#1e293b" stroke-width="1.5"/>
+  <line x1="910" y1="592" x2="910" y2="644" stroke="#475569" stroke-width="1"/>
+  <line x1="1060" y1="592" x2="1060" y2="644" stroke="#475569" stroke-width="1"/>
+  <text x="842" y="613" text-anchor="middle" class="stamp">GO-TEXTBOOK-V2</text>
+  <text x="842" y="632" text-anchor="middle" class="mono-blue">VOL.2 · GO 1.24</text>
+  <text x="985" y="613" text-anchor="middle" class="stamp">ЛИСТ / ЧЕРТЁЖ</text>
+  <text x="985" y="632" text-anchor="middle" class="mono">MOD 07</text>
+  <text x="1115" y="613" text-anchor="middle" class="stamp">МАСШТАБ</text>
+  <text x="1115" y="632" text-anchor="middle" class="mono">1 : 1</text>
+</svg>

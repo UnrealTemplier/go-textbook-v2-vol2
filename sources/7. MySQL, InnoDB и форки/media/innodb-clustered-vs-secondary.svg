@@ -1,0 +1,69 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1040" height="450" viewBox="0 0 1040 450">
+  <defs>
+    <pattern id="grid" width="24" height="24" patternUnits="userSpaceOnUse">
+      <path d="M 24 0 L 0 0 0 24" fill="none" stroke="#e2e8f0" stroke-width="0.7"/>
+    </pattern>
+    <marker id="arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6.5" markerHeight="6.5" orient="auto-start-reverse">
+      <path d="M 0 1.5 L 8 5 L 0 8.5 z" fill="#1e293b"/>
+    </marker>
+    <marker id="arrowBlue" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6.5" markerHeight="6.5" orient="auto-start-reverse">
+      <path d="M 0 1.5 L 8 5 L 0 8.5 z" fill="#0369a1"/>
+    </marker>
+    <marker id="arrowOrange" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6.5" markerHeight="6.5" orient="auto-start-reverse">
+      <path d="M 0 1.5 L 8 5 L 0 8.5 z" fill="#c2410c"/>
+    </marker>
+  </defs>
+  <style>
+    .bg { fill: #fcfaf5; }
+    .frame { fill: none; stroke: #1e293b; stroke-width: 2; }
+    .box { fill: #ffffff; stroke: #1e293b; stroke-width: 1.8; }
+    .box-accent { fill: #f0f9ff; stroke: #0369a1; stroke-width: 2; }
+    .box-warm { fill: #fff7ed; stroke: #c2410c; stroke-width: 2; }
+    .box-dark { fill: #f1f5f9; stroke: #334155; stroke-width: 1.8; }
+    .line { fill: none; stroke: #1e293b; stroke-width: 2; }
+    .line-blue { fill: none; stroke: #0369a1; stroke-width: 2.2; }
+    .line-orange { fill: none; stroke: #c2410c; stroke-width: 2.2; }
+    .line-dash { fill: none; stroke: #64748b; stroke-width: 1.6; stroke-dasharray: 6 4; }
+    .h1 { font-family: "JetBrains Mono", "Fira Code", monospace; font-size: 19px; font-weight: 700; fill: #0f172a; }
+    .sub { font-family: "Inter", "IBM Plex Sans", sans-serif; font-size: 13.5px; fill: #334155; }
+    .mono { font-family: "JetBrains Mono", "Fira Code", monospace; font-size: 13px; fill: #0f172a; }
+    .mono-sm { font-family: "JetBrains Mono", "Fira Code", monospace; font-size: 11.5px; fill: #334155; }
+    .mono-bold { font-family: "JetBrains Mono", "Fira Code", monospace; font-size: 13.5px; font-weight: 700; fill: #0f172a; }
+    .mono-blue { font-family: "JetBrains Mono", "Fira Code", monospace; font-size: 13.5px; font-weight: 700; fill: #0369a1; }
+    .mono-orange { font-family: "JetBrains Mono", "Fira Code", monospace; font-size: 13.5px; font-weight: 700; fill: #c2410c; }
+    .label { font-family: "Inter", "IBM Plex Sans", sans-serif; font-size: 12.5px; fill: #475569; }
+  </style>
+  <rect width="1040" height="450" class="bg"/>
+  <rect x="16" y="16" width="1008" height="418" fill="url(#grid)"/>
+  <rect x="16" y="16" width="1008" height="418" class="frame"/>
+  <rect x="16" y="16" width="1008" height="58" fill="#f8fafc" stroke="#1e293b" stroke-width="1.6"/>
+  <rect x="16" y="16" width="8" height="58" fill="#0369a1"/>
+  <text x="38" y="42" class="h1">INNODB: КЛАСТЕРНЫЙ ПЕРВИЧНЫЙ КЛЮЧ И ДВОЙНОЙ ПОИСК ПО ВТОРИЧНОМУ ИНДЕКСУ</text>
+  <text x="38" y="63" class="sub">Почему вторичный индекс в InnoDB хранит не адрес страницы, а значение PRIMARY KEY, и как длинный PK раздувает все индексы</text>
+
+  <rect x="38" y="96" width="465" height="318" rx="6" class="box"/>
+  <text x="270" y="124" text-anchor="middle" class="mono-blue">1. ВТОРИЧНЫЙ ИНДЕКС idx_account_id</text>
+  <rect x="175" y="146" width="190" height="42" class="box-dark"/>
+  <text x="270" y="172" text-anchor="middle" class="mono">Root (16 КБ страница)</text>
+  <line x1="270" y1="188" x2="270" y2="225" class="line-blue" marker-end="url(#arrowBlue)"/>
+  <rect x="70" y="228" width="400" height="72" class="box-accent"/>
+  <text x="270" y="254" text-anchor="middle" class="mono-bold">Лист: (account_id=42) → PK id=9015</text>
+  <text x="270" y="278" text-anchor="middle" class="label">НЕ хранит номер страницы! (Пережил page split без правок)</text>
+  <text x="70" y="338" class="mono-orange">Если запрос читает только (account_id, id):</text>
+  <text x="70" y="360" class="label">срабатывает Covering Index (Using index) — второй спуск не нужен.</text>
+
+  <line x1="470" y1="264" x2="558" y2="174" class="line-orange" marker-end="url(#arrowOrange)"/>
+
+  <rect x="533" y="96" width="469" height="318" rx="6" class="box-warm"/>
+  <text x="767" y="124" text-anchor="middle" class="mono-orange">2. КЛАСТЕРНЫЙ ИНДЕКС (PRIMARY KEY)</text>
+  <rect x="650" y="146" width="235" height="42" class="box"/>
+  <text x="767" y="172" text-anchor="middle" class="mono">Root PK → спуск по id=9015</text>
+  <line x1="767" y1="188" x2="767" y2="225" class="line-orange" marker-end="url(#arrowOrange)"/>
+  <rect x="560" y="228" width="415" height="72" class="box"/>
+  <text x="767" y="254" text-anchor="middle" class="mono-bold">Лист PK: id=9015 + ВСЕ СТОЛБЦЫ СТРОКИ</text>
+  <text x="767" y="278" text-anchor="middle" class="label">amount, currency, metadata, DB_TRX_ID, DB_ROLL_PTR</text>
+  <text x="560" y="338" class="mono-bold">Цена выбора PK (UUID CHAR(36) vs BIGINT):</text>
+  <text x="560" y="360" class="label">36-байтовый PK копируется в лист КАЖДОГО вторичного индекса</text>
+  <text x="560" y="380" class="label">и ломает последовательную вставку в крайний правый лист.</text>
+
+</svg>

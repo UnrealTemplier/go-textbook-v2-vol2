@@ -1,0 +1,42 @@
+["michael-stonebraker.webp"]
+# Commons: File:Michael Stonebraker 1.jpg; лицензия там: CC0
+# Ограничения Commons: personality
+caption = "Майкл Стоунбрейкер — создатель Ingres и PostgreSQL (лауреат премии Тьюринга 2014 года)"
+alt = "Портрет Майкла Стоунбрейкера"
+author = "Dcoetzee"
+license = "CC0"
+license_url = "http://creativecommons.org/publicdomain/zero/1.0/deed.en"
+source = "https://commons.wikimedia.org/wiki/File:Michael_Stonebraker_1.jpg"
+modified = "уменьшено до 1600 px по длинной стороне, WebP (качество 80)"
+
+["cover-module-06-postgresql.svg"]
+# Инженерная обложка MOD 06 Тома 2 (8 КБ)
+caption = "Инженерная карта Модуля 6: архитектура процессов PostgreSQL, Slotted Page с HOT-цепочками, TOAST и потоковая/логическая репликация"
+alt = "Инженерный чертёж Модуля 6: процессная архитектура PostgreSQL, shared_buffers, Heap, TOAST, HOT и PgBouncer"
+author = "Серия go-textbook-v2"
+license = "own"
+invert_dark = true
+
+["pg-processes-shared-buffers.svg"]
+# Техническая SVG-схема Тома 2 (1040×450, 5.7 КБ)
+caption = "Схема процессов PostgreSQL: PgBouncer, postmaster, бэкенды, shared_buffers, WAL buffers и фоновые процессы"
+alt = "Архитектура процессов и общей памяти PostgreSQL с PgBouncer, бэкендами и фоновыми воркерами"
+author = "Серия go-textbook-v2"
+license = "own"
+invert_dark = true
+
+["pg-heap-8kb-toast-hot.svg"]
+# Техническая SVG-схема Тома 2 (1040×450, 6.1 КБ)
+caption = "Внутреннее устройство Heap-страницы PostgreSQL: HOT-цепочка без обновления B-Tree индексов и ссылка на таблицу TOAST"
+alt = "Схема HOT-цепочки версий кортежа внутри 8-КБ Heap-страницы и внешнего хранилища TOAST"
+author = "Серия go-textbook-v2"
+license = "own"
+invert_dark = true
+
+["pg-gin-vs-brin-index.svg"]
+# Техническая SVG-схема Тома 2 (1040×440, 5.7 КБ)
+caption = "Сравнение структуры GIN (Entry Tree + Posting List/Tree) и BRIN (Min/Max по диапазонам физических страниц)"
+alt = "Сравнение архитектуры индексов GIN для JSONB и BRIN для монотонных временных рядов"
+author = "Серия go-textbook-v2"
+license = "own"
+invert_dark = true

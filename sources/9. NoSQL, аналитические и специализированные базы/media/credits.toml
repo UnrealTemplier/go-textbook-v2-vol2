@@ -1,0 +1,58 @@
+["dram-memory-module.webp"]
+# Commons: File:RAMBUS-Memory.jpg; лицензия там: Public domain
+caption = "Модуль оперативной памяти DRAM: хранение рабочего множества Redis в RAM даёт субмиллисекундную латентность ценой волатильности"
+alt = "Модуль оперативной памяти DRAM со снятым теплоотводом"
+author = "User Kotepho on en.wikipedia"
+license = "PD"
+source = "https://commons.wikimedia.org/wiki/File:RAMBUS-Memory.jpg"
+modified = "уменьшено до 1600 px по длинной стороне, WebP (качество 80)"
+
+["dram-chip-ic.webp"]
+# Commons: File:HYR186420G-653.jpg; лицензия там: CC BY-SA 4.0
+caption = "Микросхема динамической памяти: высокая пропускная способность шины памяти и плотность ячеек определяют профиль кэш-серверов"
+alt = "Кремниевые кристаллы микросхем DRAM на плате модуля памяти"
+author = "Mister rf"
+license = "CC BY-SA 4.0"
+license_url = "https://creativecommons.org/licenses/by-sa/4.0"
+source = "https://commons.wikimedia.org/wiki/File:HYR186420G-653.jpg"
+modified = "уменьшено до 1600 px по длинной стороне, WebP (качество 80)"
+
+["cover-module-09-nosql-olap-vector.svg"]
+# Инженерная обложка MOD 09 Тома 2 (7 КБ)
+caption = "Инженерная карта Модуля 9: спектр специализированных хранилищ от оперативных структур Redis/Memcached и LSM-деревьев до ClickHouse и HNSW"
+alt = "Инженерный чертёж Модуля 9: Redis/Valkey, Memcached, MongoDB, Cassandra LSM-Tree, ClickHouse MergeTree, CockroachDB и векторные индексы HNSW"
+author = "Серия go-textbook-v2"
+license = "own"
+invert_dark = true
+
+["redis-event-loop-pipelining.svg"]
+# Техническая SVG-схема Тома 2 (1040×440, 5.6 КБ)
+caption = "Механика однопоточного цикла событий Redis (ae / epoll) и ускорение через RESP Pipelining из Go"
+alt = "Сравнение одиночных запросов и RESP Pipelining в однопоточном event loop Redis"
+author = "Серия go-textbook-v2"
+license = "own"
+invert_dark = true
+
+["lsm-tree-memtable-sstable.svg"]
+# Техническая SVG-схема Тома 2 (1040×450, 5.9 КБ)
+caption = "Путь записи и чтения в LSM-Tree: CommitLog, Memtable (RAM), Flush в иммутабельные SSTable L0..L2, Bloom Filter и Compaction"
+alt = "Схема работы LSM-Tree с CommitLog, Memtable, слоями SSTable L0-L2, Bloom Filter и фоновой компактификацией"
+author = "Серия go-textbook-v2"
+license = "own"
+invert_dark = true
+
+["clickhouse-columnar-mergetree.svg"]
+# Техническая SVG-схема Тома 2 (1040×450, 5.8 КБ)
+caption = "Схема колоночного парта ClickHouse MergeTree: файлы *.bin, метки *.mrk2, разреженный индекс primary.idx и MergeTreeSimulator"
+alt = "Архитектура хранения колонок в ClickHouse MergeTree с гранулами 8192 и разреженным первичным индексом"
+author = "Серия go-textbook-v2"
+license = "own"
+invert_dark = true
+
+["hnsw-multilayer-vector-graph.svg"]
+# Техническая SVG-схема Тома 2 (1040×440, 5.7 КБ)
+caption = "Схема многослойного графа HNSW: быстрые длинные прыжки на верхнем слое и точное уточнение соседей на базовом слое 0"
+alt = "Схема многослойного графа HNSW для приближённого поиска ближайших векторов"
+author = "Серия go-textbook-v2"
+license = "own"
+invert_dark = true

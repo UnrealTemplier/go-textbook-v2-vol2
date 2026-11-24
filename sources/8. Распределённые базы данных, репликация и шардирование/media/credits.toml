@@ -1,0 +1,59 @@
+["datacenter-server-racks.webp"]
+# Commons: File:Datacenter Server Racks (22370909788).jpg; лицензия там: CC BY 2.0
+caption = "Серверные стойки в дата-центре: физическая изолированность узлов определяет задержки репликации и кворумы"
+alt = "Ряды серверных стоек в дата-центре"
+author = "Carl Lender from Sunrise, USA"
+license = "CC BY 2.0"
+license_url = "https://creativecommons.org/licenses/by/2.0"
+source = "https://commons.wikimedia.org/wiki/File:Datacenter_Server_Racks_(22370909788).jpg"
+modified = "уменьшено до 1600 px по длинной стороне, WebP (качество 80)"
+
+["datacenter-rack-shards.webp"]
+# Commons: File:Datacenter Rack.jpg; лицензия там: CC BY-SA 3.0
+caption = "Стойка серверов в дата-центре: распределение шард по зонам доступности снижает риск коррелированного отказа"
+alt = "Серверная стойка с узлами кластера"
+author = "Edmondo"
+license = "CC BY-SA 3.0"
+license_url = "https://creativecommons.org/licenses/by-sa/3.0"
+source = "https://commons.wikimedia.org/wiki/File:Datacenter_Rack.jpg"
+modified = "WebP (качество 80)"
+
+["cover-module-08-distributed-db.svg"]
+# Инженерная обложка MOD 08 Тома 2 (8 КБ)
+caption = "Инженерная карта Модуля 8: от топологий репликации и кольца консистентного хеширования до CAP/PACELC, 2PC, Saga и fencing tokens"
+alt = "Инженерный чертёж Модуля 8: репликация Leader-Follower, шардирование, кольцо консистентного хеширования, 2PC и fencing tokens"
+author = "Серия go-textbook-v2"
+license = "own"
+invert_dark = true
+
+["replication-sync-semisync-async.svg"]
+# Техническая SVG-схема Тома 2 (1040×450, 5.7 КБ)
+caption = "Таймлайны Async, Semi-Sync (ожидание 1 реплики) и Sync репликации между Leader и Follower-узлами"
+alt = "Сравнение таймлайнов подтверждения транзакции при асинхронной, полусинхронной и синхронной репликации"
+author = "Серия go-textbook-v2"
+license = "own"
+invert_dark = true
+
+["consistent-hashing-vnodes-ring.svg"]
+# Техническая SVG-схема Тома 2 (1040×460, 5.7 КБ)
+caption = "Модель ShardRouter (project/step06/sharding.go): кольцо 0..2⁶⁴-1, виртуальные узлы (vnodes) и движение по часовой стрелке"
+alt = "Кольцо консистентного хеширования с виртуальными узлами и маршрутизацией ключа по часовой стрелке"
+author = "Серия go-textbook-v2"
+license = "own"
+invert_dark = true
+
+["partitioning-range-list-hash.svg"]
+# Техническая SVG-схема Тома 2 (1040×440, 5.5 КБ)
+caption = "Три стратегии декларативного партиционирования (Range, List, Hash) и отсечение лишних партиций Partition Pruning"
+alt = "Схема стратегий Range, List и Hash партиционирования таблицы и Partition Pruning"
+author = "Серия go-textbook-v2"
+license = "own"
+invert_dark = true
+
+["two-phase-commit-blocking-window.svg"]
+# Техническая SVG-схема Тома 2 (1040×450, 5.6 КБ)
+caption = "Таймлайн протокола 2PC (Prepare / Commit) и зона неопределённости (In-Doubt State) при падении координатора"
+alt = "Последовательность сообщений 2PC и блокирующее окно при отказе координатора после фазы Prepare"
+author = "Серия go-textbook-v2"
+license = "own"
+invert_dark = true

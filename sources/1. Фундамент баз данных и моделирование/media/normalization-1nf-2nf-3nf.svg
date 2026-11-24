@@ -1,0 +1,92 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1040" height="460" viewBox="0 0 1040 460">
+  <defs>
+    <pattern id="grid" width="24" height="24" patternUnits="userSpaceOnUse">
+      <path d="M 24 0 L 0 0 0 24" fill="none" stroke="#e2e8f0" stroke-width="0.7"/>
+    </pattern>
+    <marker id="arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6.5" markerHeight="6.5" orient="auto-start-reverse">
+      <path d="M 0 1.5 L 8 5 L 0 8.5 z" fill="#1e293b"/>
+    </marker>
+    <marker id="arrowBlue" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6.5" markerHeight="6.5" orient="auto-start-reverse">
+      <path d="M 0 1.5 L 8 5 L 0 8.5 z" fill="#0369a1"/>
+    </marker>
+    <marker id="arrowOrange" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6.5" markerHeight="6.5" orient="auto-start-reverse">
+      <path d="M 0 1.5 L 8 5 L 0 8.5 z" fill="#c2410c"/>
+    </marker>
+  </defs>
+  <style>
+    .bg { fill: #fcfaf5; }
+    .frame { fill: none; stroke: #1e293b; stroke-width: 2; }
+    .box { fill: #ffffff; stroke: #1e293b; stroke-width: 1.8; }
+    .box-accent { fill: #f0f9ff; stroke: #0369a1; stroke-width: 2; }
+    .box-warm { fill: #fff7ed; stroke: #c2410c; stroke-width: 2; }
+    .box-dark { fill: #f1f5f9; stroke: #334155; stroke-width: 1.8; }
+    .line { fill: none; stroke: #1e293b; stroke-width: 2; }
+    .line-blue { fill: none; stroke: #0369a1; stroke-width: 2.2; }
+    .line-orange { fill: none; stroke: #c2410c; stroke-width: 2.2; }
+    .line-dash { fill: none; stroke: #64748b; stroke-width: 1.6; stroke-dasharray: 6 4; }
+    .h1 { font-family: "JetBrains Mono", "Fira Code", monospace; font-size: 19px; font-weight: 700; fill: #0f172a; }
+    .sub { font-family: "Inter", "IBM Plex Sans", sans-serif; font-size: 13.5px; fill: #334155; }
+    .mono { font-family: "JetBrains Mono", "Fira Code", monospace; font-size: 13px; fill: #0f172a; }
+    .mono-sm { font-family: "JetBrains Mono", "Fira Code", monospace; font-size: 11.5px; fill: #334155; }
+    .mono-bold { font-family: "JetBrains Mono", "Fira Code", monospace; font-size: 13.5px; font-weight: 700; fill: #0f172a; }
+    .mono-blue { font-family: "JetBrains Mono", "Fira Code", monospace; font-size: 13.5px; font-weight: 700; fill: #0369a1; }
+    .mono-orange { font-family: "JetBrains Mono", "Fira Code", monospace; font-size: 13.5px; font-weight: 700; fill: #c2410c; }
+    .label { font-family: "Inter", "IBM Plex Sans", sans-serif; font-size: 12.5px; fill: #475569; }
+  </style>
+  <rect width="1040" height="460" class="bg"/>
+  <rect x="16" y="16" width="1008" height="428" fill="url(#grid)"/>
+  <rect x="16" y="16" width="1008" height="428" class="frame"/>
+  <rect x="16" y="16" width="1008" height="58" fill="#f8fafc" stroke="#1e293b" stroke-width="1.6"/>
+  <rect x="16" y="16" width="8" height="58" fill="#0369a1"/>
+  <text x="38" y="42" class="h1">СТУПЕНИ НОРМАЛИЗАЦИИ: ОТ ХАОСА 0NF К ЧИСТОЙ 3NF</text>
+  <text x="38" y="63" class="sub">Последовательное устранение списков в полях, частичных зависимостей от составного ключа и транзитивных связей</text>
+
+  <rect x="38" y="96" width="225" height="320" rx="6" class="box-warm"/>
+  <text x="150" y="124" text-anchor="middle" class="mono-orange">0NF (Аномалии)</text>
+  <text x="55" y="156" class="mono-sm">order_id = 10</text>
+  <text x="55" y="178" class="mono-sm">items = "A, B, C"</text>
+  <text x="55" y="200" class="mono-sm">city = "Москва"</text>
+  <text x="55" y="222" class="mono-sm">zip = "101000"</text>
+  <line x1="55" y1="248" x2="245" y2="248" stroke="#cbd5e1"/>
+  <text x="55" y="276" class="label">Нельзя индексировать</text>
+  <text x="55" y="296" class="label">элемент списка; правка</text>
+  <text x="55" y="316" class="label">города бьёт десятки строк</text>
+
+  <line x1="263" y1="256" x2="293" y2="256" class="line-blue" marker-end="url(#arrowBlue)"/>
+
+  <rect x="296" y="96" width="225" height="320" rx="6" class="box-dark"/>
+  <text x="408" y="124" text-anchor="middle" class="mono-bold">1NF (Атомарность)</text>
+  <text x="312" y="156" class="mono-sm">PK: (order_id, item_id)</text>
+  <text x="312" y="182" class="mono-sm">order_date (зависит</text>
+  <text x="312" y="202" class="mono-sm">  только от order_id!)</text>
+  <text x="312" y="228" class="mono-sm">city → zip</text>
+  <line x1="312" y1="248" x2="505" y2="248" stroke="#cbd5e1"/>
+  <text x="312" y="276" class="label">Убрали списки в ячейке,</text>
+  <text x="312" y="296" class="label">но order_date дублируется</text>
+  <text x="312" y="316" class="label">в каждой позиции заказа</text>
+
+  <line x1="521" y1="256" x2="551" y2="256" class="line-blue" marker-end="url(#arrowBlue)"/>
+
+  <rect x="554" y="96" width="225" height="320" rx="6" class="box"/>
+  <text x="666" y="124" text-anchor="middle" class="mono-blue">2NF (Полный ключ)</text>
+  <text x="570" y="156" class="mono-sm">orders(id, date, city, zip)</text>
+  <text x="570" y="182" class="mono-sm">order_items(order_id,</text>
+  <text x="570" y="202" class="mono-sm">  item_id, qty)</text>
+  <line x1="570" y1="248" x2="762" y2="248" stroke="#cbd5e1"/>
+  <text x="570" y="276" class="label">Частичные зависимости</text>
+  <text x="570" y="296" class="label">вынесены; осталась связь</text>
+  <text x="570" y="316" class="label">city → zip не через ключ</text>
+
+  <line x1="779" y1="256" x2="809" y2="256" class="line-blue" marker-end="url(#arrowBlue)"/>
+
+  <rect x="812" y="96" width="190" height="320" rx="6" class="box-accent"/>
+  <text x="907" y="124" text-anchor="middle" class="mono-blue">3NF (Только ключ)</text>
+  <text x="826" y="156" class="mono-sm">orders(id, date, zip)</text>
+  <text x="826" y="184" class="mono-sm">order_items(...)</text>
+  <text x="826" y="212" class="mono-sm">cities(zip PK, city)</text>
+  <line x1="826" y1="248" x2="988" y2="248" stroke="#cbd5e1"/>
+  <text x="826" y="276" class="label">Каждый неключевой</text>
+  <text x="826" y="296" class="label">атрибут зависит</text>
+  <text x="826" y="316" class="label">только от ключа</text>
+
+</svg>

@@ -1,0 +1,88 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1040" height="460" viewBox="0 0 1040 460">
+  <defs>
+    <pattern id="grid" width="24" height="24" patternUnits="userSpaceOnUse">
+      <path d="M 24 0 L 0 0 0 24" fill="none" stroke="#e2e8f0" stroke-width="0.7"/>
+    </pattern>
+    <marker id="arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6.5" markerHeight="6.5" orient="auto-start-reverse">
+      <path d="M 0 1.5 L 8 5 L 0 8.5 z" fill="#1e293b"/>
+    </marker>
+    <marker id="arrowBlue" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6.5" markerHeight="6.5" orient="auto-start-reverse">
+      <path d="M 0 1.5 L 8 5 L 0 8.5 z" fill="#0369a1"/>
+    </marker>
+    <marker id="arrowOrange" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6.5" markerHeight="6.5" orient="auto-start-reverse">
+      <path d="M 0 1.5 L 8 5 L 0 8.5 z" fill="#c2410c"/>
+    </marker>
+  </defs>
+  <style>
+    .bg { fill: #fcfaf5; }
+    .frame { fill: none; stroke: #1e293b; stroke-width: 2; }
+    .box { fill: #ffffff; stroke: #1e293b; stroke-width: 1.8; }
+    .box-accent { fill: #f0f9ff; stroke: #0369a1; stroke-width: 2; }
+    .box-warm { fill: #fff7ed; stroke: #c2410c; stroke-width: 2; }
+    .box-dark { fill: #f1f5f9; stroke: #334155; stroke-width: 1.8; }
+    .line { fill: none; stroke: #1e293b; stroke-width: 2; }
+    .line-blue { fill: none; stroke: #0369a1; stroke-width: 2.2; }
+    .line-orange { fill: none; stroke: #c2410c; stroke-width: 2.2; }
+    .line-dash { fill: none; stroke: #64748b; stroke-width: 1.6; stroke-dasharray: 6 4; }
+    .h1 { font-family: "JetBrains Mono", "Fira Code", monospace; font-size: 19px; font-weight: 700; fill: #0f172a; }
+    .sub { font-family: "Inter", "IBM Plex Sans", sans-serif; font-size: 13.5px; fill: #334155; }
+    .mono { font-family: "JetBrains Mono", "Fira Code", monospace; font-size: 13px; fill: #0f172a; }
+    .mono-sm { font-family: "JetBrains Mono", "Fira Code", monospace; font-size: 11.5px; fill: #334155; }
+    .mono-bold { font-family: "JetBrains Mono", "Fira Code", monospace; font-size: 13.5px; font-weight: 700; fill: #0f172a; }
+    .mono-blue { font-family: "JetBrains Mono", "Fira Code", monospace; font-size: 13.5px; font-weight: 700; fill: #0369a1; }
+    .mono-orange { font-family: "JetBrains Mono", "Fira Code", monospace; font-size: 13.5px; font-weight: 700; fill: #c2410c; }
+    .label { font-family: "Inter", "IBM Plex Sans", sans-serif; font-size: 12.5px; fill: #475569; }
+  </style>
+  <rect width="1040" height="460" class="bg"/>
+  <rect x="16" y="16" width="1008" height="428" fill="url(#grid)"/>
+  <rect x="16" y="16" width="1008" height="428" class="frame"/>
+  <rect x="16" y="16" width="1008" height="58" fill="#f8fafc" stroke="#1e293b" stroke-width="1.6"/>
+  <rect x="16" y="16" width="8" height="58" fill="#0369a1"/>
+  <text x="38" y="42" class="h1">АНАТОМИЯ 8-КБ СТРАНИЦЫ B+ TREE В POSTGRESQL (SLOTTED PAGE)</text>
+  <text x="38" y="63" class="sub">Почему ключи растут с начала страницы навстречу телам элементов и как устроен High Key по Леману–Яо</text>
+
+  <rect x="38" y="96" width="964" height="205" rx="6" class="box"/>
+  <text x="60" y="124" class="mono-blue">СТРАНИЦА ИНДЕКСА B+ TREE = 8 192 БАЙТА (BLCKSZ)</text>
+  <g transform="translate(60, 142)">
+    <rect x="0" y="0" width="135" height="105" class="box-dark"/>
+    <text x="67" y="30" text-anchor="middle" class="mono-bold">PageHeader</text>
+    <text x="67" y="52" text-anchor="middle" class="mono-sm">24 байта</text>
+    <text x="67" y="74" text-anchor="middle" class="label">pd_lsn, lower,</text>
+    <text x="67" y="92" text-anchor="middle" class="label">upper, special</text>
+
+    <rect x="135" y="0" width="180" height="105" class="box-accent"/>
+    <text x="225" y="30" text-anchor="middle" class="mono-blue">Line Pointers</text>
+    <text x="225" y="52" text-anchor="middle" class="mono-sm">ItemIdData (4 Б)</text>
+    <text x="225" y="74" text-anchor="middle" class="label">Смещения →</text>
+    <text x="225" y="92" text-anchor="middle" class="label">Binary Search</text>
+
+    <rect x="315" y="0" width="210" height="105" class="box"/>
+    <text x="420" y="42" text-anchor="middle" class="mono-bold">Free Space</text>
+    <text x="420" y="66" text-anchor="middle" class="label">lower ... upper</text>
+    <text x="420" y="88" text-anchor="middle" class="label">(fillfactor 90%)</text>
+
+    <rect x="525" y="0" width="265" height="105" class="box-warm"/>
+    <text x="657" y="30" text-anchor="middle" class="mono-orange">Index Tuples (Items)</text>
+    <text x="657" y="52" text-anchor="middle" class="mono-sm">← Растут справа налево</text>
+    <text x="657" y="74" text-anchor="middle" class="label">[High Key] + (key, ctid)</text>
+    <text x="657" y="92" text-anchor="middle" class="label">В ветках — номера страниц</text>
+
+    <rect x="790" y="0" width="130" height="105" class="box-dark"/>
+    <text x="855" y="30" text-anchor="middle" class="mono-bold">Opaque</text>
+    <text x="855" y="52" text-anchor="middle" class="mono-sm">16 байт</text>
+    <text x="855" y="74" text-anchor="middle" class="label">btpo_prev /</text>
+    <text x="855" y="92" text-anchor="middle" class="label">btpo_next</text>
+  </g>
+  <text x="60" y="276" class="label">Отсортированный массив ItemIdData даёт O(log₂ M) в L1/L2 кэше без перемещения тяжёлых кортежей при вставке.</text>
+
+  <rect x="38" y="320" width="465" height="106" rx="6" class="box-accent"/>
+  <text x="60" y="348" class="mono-blue">Указатели на листья: двусвязный список</text>
+  <text x="60" y="372" class="label">btpo_prev и btpo_next связывают листья на одном уровне:</text>
+  <text x="60" y="394" class="label">диапазонный скан идёт вбок по листьям без возврата к корню.</text>
+
+  <rect x="533" y="320" width="469" height="106" rx="6" class="box-warm"/>
+  <text x="555" y="348" class="mono-orange">High Key и блокировки Лемана–Яо</text>
+  <text x="555" y="372" class="label">Если лист расщепился во время спуска читателя, ключ &gt; High Key</text>
+  <text x="555" y="394" class="label">просто направляет поиск вправо по btpo_next без глобальной блокировки.</text>
+
+</svg>

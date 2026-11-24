@@ -1,0 +1,67 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1040" height="440" viewBox="0 0 1040 440">
+  <defs>
+    <pattern id="grid" width="24" height="24" patternUnits="userSpaceOnUse">
+      <path d="M 24 0 L 0 0 0 24" fill="none" stroke="#e2e8f0" stroke-width="0.7"/>
+    </pattern>
+    <marker id="arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6.5" markerHeight="6.5" orient="auto-start-reverse">
+      <path d="M 0 1.5 L 8 5 L 0 8.5 z" fill="#1e293b"/>
+    </marker>
+    <marker id="arrowBlue" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6.5" markerHeight="6.5" orient="auto-start-reverse">
+      <path d="M 0 1.5 L 8 5 L 0 8.5 z" fill="#0369a1"/>
+    </marker>
+    <marker id="arrowOrange" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6.5" markerHeight="6.5" orient="auto-start-reverse">
+      <path d="M 0 1.5 L 8 5 L 0 8.5 z" fill="#c2410c"/>
+    </marker>
+  </defs>
+  <style>
+    .bg { fill: #fcfaf5; }
+    .frame { fill: none; stroke: #1e293b; stroke-width: 2; }
+    .box { fill: #ffffff; stroke: #1e293b; stroke-width: 1.8; }
+    .box-accent { fill: #f0f9ff; stroke: #0369a1; stroke-width: 2; }
+    .box-warm { fill: #fff7ed; stroke: #c2410c; stroke-width: 2; }
+    .box-dark { fill: #f1f5f9; stroke: #334155; stroke-width: 1.8; }
+    .line { fill: none; stroke: #1e293b; stroke-width: 2; }
+    .line-blue { fill: none; stroke: #0369a1; stroke-width: 2.2; }
+    .line-orange { fill: none; stroke: #c2410c; stroke-width: 2.2; }
+    .line-dash { fill: none; stroke: #64748b; stroke-width: 1.6; stroke-dasharray: 6 4; }
+    .h1 { font-family: "JetBrains Mono", "Fira Code", monospace; font-size: 19px; font-weight: 700; fill: #0f172a; }
+    .sub { font-family: "Inter", "IBM Plex Sans", sans-serif; font-size: 13.5px; fill: #334155; }
+    .mono { font-family: "JetBrains Mono", "Fira Code", monospace; font-size: 13px; fill: #0f172a; }
+    .mono-sm { font-family: "JetBrains Mono", "Fira Code", monospace; font-size: 11.5px; fill: #334155; }
+    .mono-bold { font-family: "JetBrains Mono", "Fira Code", monospace; font-size: 13.5px; font-weight: 700; fill: #0f172a; }
+    .mono-blue { font-family: "JetBrains Mono", "Fira Code", monospace; font-size: 13.5px; font-weight: 700; fill: #0369a1; }
+    .mono-orange { font-family: "JetBrains Mono", "Fira Code", monospace; font-size: 13.5px; font-weight: 700; fill: #c2410c; }
+    .label { font-family: "Inter", "IBM Plex Sans", sans-serif; font-size: 12.5px; fill: #475569; }
+  </style>
+  <rect width="1040" height="440" class="bg"/>
+  <rect x="16" y="16" width="1008" height="408" fill="url(#grid)"/>
+  <rect x="16" y="16" width="1008" height="408" class="frame"/>
+  <rect x="16" y="16" width="1008" height="58" fill="#f8fafc" stroke="#1e293b" stroke-width="1.6"/>
+  <rect x="16" y="16" width="8" height="58" fill="#0369a1"/>
+  <text x="38" y="42" class="h1">ПАРТИЦИОНИРОВАНИЕ ВНУТРИ ОДНОЙ БД: RANGE, LIST И HASH + PRUNING</text>
+  <text x="38" y="63" class="sub">Разделение гигантской таблицы на компактные партиции для локальных индексов и мгновенного удаления старых месяцев</text>
+
+  <rect x="38" y="96" width="305" height="205" rx="6" class="box-accent"/>
+  <text x="190" y="124" text-anchor="middle" class="mono-blue">RANGE (created_at)</text>
+  <rect x="62" y="144" width="256" height="36" class="box"/><text x="190" y="167" text-anchor="middle" class="mono-sm">p_2026_03 [Mar 1..Apr 1)</text>
+  <rect x="62" y="188" width="256" height="36" class="box"/><text x="190" y="211" text-anchor="middle" class="mono-sm">p_2026_04 [Apr 1..May 1)</text>
+  <rect x="62" y="232" width="256" height="36" class="box-warm"/><text x="190" y="255" text-anchor="middle" class="mono-orange">p_2026_05 (горячая!)</text>
+
+  <rect x="368" y="96" width="305" height="205" rx="6" class="box"/>
+  <text x="520" y="124" text-anchor="middle" class="mono-bold">LIST (region / currency)</text>
+  <rect x="392" y="144" width="256" height="36" class="box-dark"/><text x="520" y="167" text-anchor="middle" class="mono-sm">p_eu IN ('EUR', 'GBP')</text>
+  <rect x="392" y="188" width="256" height="36" class="box-dark"/><text x="520" y="211" text-anchor="middle" class="mono-sm">p_ru IN ('RUB')</text>
+  <rect x="392" y="232" width="256" height="36" class="box-dark"/><text x="520" y="255" text-anchor="middle" class="mono-sm">p_default (DEFAULT)</text>
+
+  <rect x="698" y="96" width="304" height="205" rx="6" class="box-dark"/>
+  <text x="850" y="124" text-anchor="middle" class="mono-bold">HASH (account_id)</text>
+  <rect x="722" y="144" width="256" height="36" class="box"/><text x="850" y="167" text-anchor="middle" class="mono-sm">p_0 (MOD 4, REM 0)</text>
+  <rect x="722" y="188" width="256" height="36" class="box"/><text x="850" y="211" text-anchor="middle" class="mono-sm">p_1 (MOD 4, REM 1)</text>
+  <rect x="722" y="232" width="256" height="36" class="box"/><text x="850" y="255" text-anchor="middle" class="mono-sm">p_2, p_3 (равные бакеты)</text>
+
+  <rect x="38" y="320" width="964" height="92" rx="6" class="box"/>
+  <text x="60" y="348" class="mono-blue">PARTITION PRUNING + МГНОВЕННОЕ УДАЛЕНИЕ ИСТОРИИ (DATA RETENTION):</text>
+  <text x="60" y="372" class="label">1. Запрос с WHERE created_at &gt;= '2026-05-01' сканирует только p_2026_05 и её маленький B-Tree в RAM.</text>
+  <text x="60" y="394" class="label">2. Удаление года архивов: DETACH PARTITION CONCURRENTLY + DROP TABLE за миллисекунды без нагрузки на VACUUM!</text>
+
+</svg>

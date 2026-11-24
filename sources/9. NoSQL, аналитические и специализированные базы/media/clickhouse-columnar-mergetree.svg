@@ -1,0 +1,78 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1040" height="450" viewBox="0 0 1040 450">
+  <defs>
+    <pattern id="grid" width="24" height="24" patternUnits="userSpaceOnUse">
+      <path d="M 24 0 L 0 0 0 24" fill="none" stroke="#e2e8f0" stroke-width="0.7"/>
+    </pattern>
+    <marker id="arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6.5" markerHeight="6.5" orient="auto-start-reverse">
+      <path d="M 0 1.5 L 8 5 L 0 8.5 z" fill="#1e293b"/>
+    </marker>
+    <marker id="arrowBlue" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6.5" markerHeight="6.5" orient="auto-start-reverse">
+      <path d="M 0 1.5 L 8 5 L 0 8.5 z" fill="#0369a1"/>
+    </marker>
+    <marker id="arrowOrange" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6.5" markerHeight="6.5" orient="auto-start-reverse">
+      <path d="M 0 1.5 L 8 5 L 0 8.5 z" fill="#c2410c"/>
+    </marker>
+  </defs>
+  <style>
+    .bg { fill: #fcfaf5; }
+    .frame { fill: none; stroke: #1e293b; stroke-width: 2; }
+    .box { fill: #ffffff; stroke: #1e293b; stroke-width: 1.8; }
+    .box-accent { fill: #f0f9ff; stroke: #0369a1; stroke-width: 2; }
+    .box-warm { fill: #fff7ed; stroke: #c2410c; stroke-width: 2; }
+    .box-dark { fill: #f1f5f9; stroke: #334155; stroke-width: 1.8; }
+    .line { fill: none; stroke: #1e293b; stroke-width: 2; }
+    .line-blue { fill: none; stroke: #0369a1; stroke-width: 2.2; }
+    .line-orange { fill: none; stroke: #c2410c; stroke-width: 2.2; }
+    .line-dash { fill: none; stroke: #64748b; stroke-width: 1.6; stroke-dasharray: 6 4; }
+    .h1 { font-family: "JetBrains Mono", "Fira Code", monospace; font-size: 19px; font-weight: 700; fill: #0f172a; }
+    .sub { font-family: "Inter", "IBM Plex Sans", sans-serif; font-size: 13.5px; fill: #334155; }
+    .mono { font-family: "JetBrains Mono", "Fira Code", monospace; font-size: 13px; fill: #0f172a; }
+    .mono-sm { font-family: "JetBrains Mono", "Fira Code", monospace; font-size: 11.5px; fill: #334155; }
+    .mono-bold { font-family: "JetBrains Mono", "Fira Code", monospace; font-size: 13.5px; font-weight: 700; fill: #0f172a; }
+    .mono-blue { font-family: "JetBrains Mono", "Fira Code", monospace; font-size: 13.5px; font-weight: 700; fill: #0369a1; }
+    .mono-orange { font-family: "JetBrains Mono", "Fira Code", monospace; font-size: 13.5px; font-weight: 700; fill: #c2410c; }
+    .label { font-family: "Inter", "IBM Plex Sans", sans-serif; font-size: 12.5px; fill: #475569; }
+  </style>
+  <rect width="1040" height="450" class="bg"/>
+  <rect x="16" y="16" width="1008" height="418" fill="url(#grid)"/>
+  <rect x="16" y="16" width="1008" height="418" class="frame"/>
+  <rect x="16" y="16" width="1008" height="58" fill="#f8fafc" stroke="#1e293b" stroke-width="1.6"/>
+  <rect x="16" y="16" width="8" height="58" fill="#0369a1"/>
+  <text x="38" y="42" class="h1">CLICKHOUSE MERGETREE: КОЛОНКИ, ГРАНУЛЫ 8192 И ВЕКТОРИЗАЦИЯ (STEP 07)</text>
+  <text x="38" y="63" class="sub">Почему OLAP читает только нужные столбцы, сжимает однородные массивы в 10× и избегает одиночных INSERT</text>
+
+  <rect x="38" y="96" width="465" height="314" rx="6" class="box"/>
+  <text x="270" y="124" text-anchor="middle" class="mono-blue">СТРОКОВОЕ (OLTP) vs КОЛОНОЧНОЕ (OLAP)</text>
+  <rect x="62" y="148" width="418" height="72" class="box-warm"/>
+  <text x="271" y="174" text-anchor="middle" class="mono-orange">Row-Oriented (PostgreSQL Heap)</text>
+  <text x="271" y="198" text-anchor="middle" class="mono-sm">[id, date, curr, kind, desc, amount] → читает все поля!</text>
+
+  <rect x="62" y="238" width="418" height="148" class="box-accent"/>
+  <text x="271" y="264" text-anchor="middle" class="mono-blue">Column-Oriented (001_ledger_events.sql)</text>
+  <text x="82" y="292" class="mono-sm">currency.bin:    [RUB, RUB, RUB, USD, ...]</text>
+  <text x="82" y="316" class="mono-sm">amount_minor.bin:[500, -200, 800, 100, ...]</text>
+  <text x="82" y="344" class="label">SUM(amount) читает только 2 файла + SIMD AVX2!</text>
+  <text x="82" y="366" class="mono-sm">В Go: MergeTreeSimulator (project/step07/)</text>
+
+  <rect x="533" y="96" width="469" height="314" rx="6" class="box"/>
+  <text x="767" y="124" text-anchor="middle" class="mono-blue">АНАТОМИЯ ПАРТА MERGETREE (ГРАНУЛА = 8 192 СТРОК)</text>
+  <rect x="558" y="148" width="195" height="82" class="box-dark"/>
+  <text x="655" y="174" text-anchor="middle" class="mono-bold">primary.idx (RAM)</text>
+  <text x="655" y="198" text-anchor="middle" class="label">1 ключ на каждые</text>
+  <text x="655" y="216" text-anchor="middle" class="label">8 192 строк (разреженный)</text>
+
+  <line x1="753" y1="189" x2="788" y2="189" class="line-blue" marker-end="url(#arrowBlue)"/>
+
+  <rect x="791" y="148" width="188" height="82" class="box-accent"/>
+  <text x="885" y="174" text-anchor="middle" class="mono-blue">marks (*.mrk2)</text>
+  <text x="885" y="198" text-anchor="middle" class="label">Смещение сжатого</text>
+  <text x="885" y="216" text-anchor="middle" class="label">блока LZ4/ZSTD</text>
+
+  <rect x="558" y="248" width="420" height="138" class="box-warm"/>
+  <text x="578" y="276" class="mono-orange">Правило батчинга и SummingMergeTree:</text>
+  <text x="578" y="300" class="label">1. Вставляйте пачками (10k–100k строк), иначе фоновые</text>
+  <text x="578" y="320" class="label">   слияния не успеют и упрутся в Too many parts.</text>
+  <text x="578" y="344" class="label">2. Витрина mv_daily_turnover агрегирует данные инкрементально</text>
+  <text x="578" y="364" class="label">   при вставке блока — в SELECT нужен SUM/GROUP BY или FINAL.</text>
+
+</svg>

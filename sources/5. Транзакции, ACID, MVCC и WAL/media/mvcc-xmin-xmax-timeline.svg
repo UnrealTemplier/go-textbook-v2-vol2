@@ -1,0 +1,76 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1040" height="450" viewBox="0 0 1040 450">
+  <defs>
+    <pattern id="grid" width="24" height="24" patternUnits="userSpaceOnUse">
+      <path d="M 24 0 L 0 0 0 24" fill="none" stroke="#e2e8f0" stroke-width="0.7"/>
+    </pattern>
+    <marker id="arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6.5" markerHeight="6.5" orient="auto-start-reverse">
+      <path d="M 0 1.5 L 8 5 L 0 8.5 z" fill="#1e293b"/>
+    </marker>
+    <marker id="arrowBlue" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6.5" markerHeight="6.5" orient="auto-start-reverse">
+      <path d="M 0 1.5 L 8 5 L 0 8.5 z" fill="#0369a1"/>
+    </marker>
+    <marker id="arrowOrange" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6.5" markerHeight="6.5" orient="auto-start-reverse">
+      <path d="M 0 1.5 L 8 5 L 0 8.5 z" fill="#c2410c"/>
+    </marker>
+  </defs>
+  <style>
+    .bg { fill: #fcfaf5; }
+    .frame { fill: none; stroke: #1e293b; stroke-width: 2; }
+    .box { fill: #ffffff; stroke: #1e293b; stroke-width: 1.8; }
+    .box-accent { fill: #f0f9ff; stroke: #0369a1; stroke-width: 2; }
+    .box-warm { fill: #fff7ed; stroke: #c2410c; stroke-width: 2; }
+    .box-dark { fill: #f1f5f9; stroke: #334155; stroke-width: 1.8; }
+    .line { fill: none; stroke: #1e293b; stroke-width: 2; }
+    .line-blue { fill: none; stroke: #0369a1; stroke-width: 2.2; }
+    .line-orange { fill: none; stroke: #c2410c; stroke-width: 2.2; }
+    .line-dash { fill: none; stroke: #64748b; stroke-width: 1.6; stroke-dasharray: 6 4; }
+    .h1 { font-family: "JetBrains Mono", "Fira Code", monospace; font-size: 19px; font-weight: 700; fill: #0f172a; }
+    .sub { font-family: "Inter", "IBM Plex Sans", sans-serif; font-size: 13.5px; fill: #334155; }
+    .mono { font-family: "JetBrains Mono", "Fira Code", monospace; font-size: 13px; fill: #0f172a; }
+    .mono-sm { font-family: "JetBrains Mono", "Fira Code", monospace; font-size: 11.5px; fill: #334155; }
+    .mono-bold { font-family: "JetBrains Mono", "Fira Code", monospace; font-size: 13.5px; font-weight: 700; fill: #0f172a; }
+    .mono-blue { font-family: "JetBrains Mono", "Fira Code", monospace; font-size: 13.5px; font-weight: 700; fill: #0369a1; }
+    .mono-orange { font-family: "JetBrains Mono", "Fira Code", monospace; font-size: 13.5px; font-weight: 700; fill: #c2410c; }
+    .label { font-family: "Inter", "IBM Plex Sans", sans-serif; font-size: 12.5px; fill: #475569; }
+  </style>
+  <rect width="1040" height="450" class="bg"/>
+  <rect x="16" y="16" width="1008" height="418" fill="url(#grid)"/>
+  <rect x="16" y="16" width="1008" height="418" class="frame"/>
+  <rect x="16" y="16" width="1008" height="58" fill="#f8fafc" stroke="#1e293b" stroke-width="1.6"/>
+  <rect x="16" y="16" width="8" height="58" fill="#0369a1"/>
+  <text x="38" y="42" class="h1">MVCC В ДЕЙСТВИИ: СНИМКИ ВРЕМЕНИ И ЦЕПОЧКА ВЕРСИЙ XMIN / XMAX</text>
+  <text x="38" y="63" class="sub">Почему долгая аналитическая транзакция видит старый баланс 500, пока новые клиенты уже видят 600 — без единой блокировки чтения</text>
+
+  <rect x="38" y="96" width="964" height="190" rx="6" class="box"/>
+  <text x="60" y="124" class="mono-blue">ЦЕПОЧКА ВЕРСИЙ БАЛАНСА НА ВРЕМЕННОЙ ШКАЛЕ (STEP 05 MVCCENGINE)</text>
+  <line x1="70" y1="210" x2="965" y2="210" class="line" marker-end="url(#arrow)"/>
+  <rect x="75" y="145" width="235" height="52" class="box-accent"/>
+  <text x="192" y="168" text-anchor="middle" class="mono-bold">v1: balance=500</text>
+  <text x="192" y="186" text-anchor="middle" class="mono-sm">xmin=10, xmax=12</text>
+
+  <rect x="375" y="145" width="250" height="52" class="box-warm"/>
+  <text x="500" y="168" text-anchor="middle" class="mono-orange">v2: balance=600</text>
+  <text x="500" y="186" text-anchor="middle" class="mono-sm">xmin=12, xmax=0 (актуальна)</text>
+
+  <rect x="705" y="145" width="255" height="52" class="box-dark"/>
+  <text x="832" y="168" text-anchor="middle" class="mono-bold">VACUUM (после XID 11)</text>
+  <text x="832" y="186" text-anchor="middle" class="label">Удалит v1 только после ухода tx11</text>
+
+  <text x="90" y="236" class="mono-sm">t1: tx10 COMMIT</text>
+  <text x="275" y="236" class="mono-blue">t2: tx11 BEGIN (снимок {10})</text>
+  <text x="485" y="236" class="mono-orange">t3: tx12 UPDATE + COMMIT</text>
+  <text x="720" y="236" class="mono-sm">t4: tx13 BEGIN (снимок {10,12})</text>
+
+  <rect x="38" y="306" width="465" height="114" rx="6" class="box-accent"/>
+  <text x="60" y="334" class="mono-blue">Транзакция tx11 (Snapshot {10})</text>
+  <text x="60" y="358" class="label">v1: xmin=10 виден, xmax=12 ещё НЕ закоммичен в её снимке → читает 500.</text>
+  <text x="60" y="380" class="label">v2: xmin=12 не входит в снимок → игнорируется.</text>
+  <text x="60" y="402" class="mono-sm">Писатель tx12 не блокировал читателя tx11!</text>
+
+  <rect x="533" y="306" width="469" height="114" rx="6" class="box-warm"/>
+  <text x="555" y="334" class="mono-orange">Конфликт First-Committer-Wins (tx14 vs tx12)</text>
+  <text x="555" y="358" class="label">Если tx14 стартовала до коммита tx12 и меняет ту же строку,</text>
+  <text x="555" y="380" class="label">при Commit она получит SQLSTATE 40001 (ErrWriteConflict in step05).</text>
+  <text x="555" y="402" class="label">Пока tx11 жива, VACUUM не может освободить старую версию v1.</text>
+
+</svg>

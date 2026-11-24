@@ -1,0 +1,41 @@
+["ibm-lto-tape-backup.webp"]
+# Commons: File:IBM LTO-6 Tape drives.jpg; лицензия там: CC BY 2.0
+caption = "Ленточные накопители IBM LTO-6: холодный архив бэкапов и база для долговременного хранения WAL в соответствии с политикой RPO/RTO"
+alt = "Ленточные приводы IBM LTO-6 в библиотеке резервного копирования"
+author = "vaxomatic"
+license = "CC BY 2.0"
+license_url = "https://creativecommons.org/licenses/by/2.0"
+source = "https://commons.wikimedia.org/wiki/File:IBM_LTO-6_Tape_drives.jpg"
+modified = "уменьшено до 1600 px по длинной стороне, WebP (качество 80)"
+
+["cover-module-10-go-highload-final.svg"]
+# Инженерная обложка MOD 10 Тома 2 (8 КБ)
+caption = "Инженерная карта Модуля 10: сквозная архитектура финального сервиса LedgerPulse от HTTP API и Singleflight до ledgerdriver и Outbox"
+alt = "Инженерный чертёж Модуля 10: финал LedgerPulse поверх database/sql, TxManager, Idempotency, Outbox, Singleflight, PITR и безопасность БД"
+author = "Серия go-textbook-v2"
+license = "own"
+invert_dark = true
+
+["database-sql-pool-states.svg"]
+# Техническая SVG-схема Тома 2 (1040×450, 5.8 КБ)
+caption = "Внутренняя механика пула *sql.DB: freeConn (LIFO), connOpener, блокировка при MaxOpenConns, Tx-pinning и повтор при ErrBadConn"
+alt = "Схема состояний соединений в пуле database/sql, работы connOpener и привязки транзакции Tx"
+author = "Серия go-textbook-v2"
+license = "own"
+invert_dark = true
+
+["cache-aside-singleflight-stampede.svg"]
+# Техническая SVG-схема Тома 2 (1040×450, 5.9 КБ)
+caption = "Сравнение лавины промахов (Cache Stampede) и слияния параллельных запросов через Singleflight + TTL с джиттером"
+alt = "Схема защиты Cache-Aside от Cache Stampede с помощью Singleflight и случайного джиттера TTL"
+author = "Серия go-textbook-v2"
+license = "own"
+invert_dark = true
+
+["expand-and-contract-phases.svg"]
+# Техническая SVG-схема Тома 2 (1040×440, 5.8 КБ)
+caption = "Схема четырёх этапов zero-downtime миграции Expand-and-Contract с окном совместимости версий сервиса N и N+1"
+alt = "Четыре этапа миграции базы данных Expand-and-Contract без остановки сервиса"
+author = "Серия go-textbook-v2"
+license = "own"
+invert_dark = true

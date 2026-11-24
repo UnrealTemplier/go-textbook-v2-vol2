@@ -1,0 +1,31 @@
+["cover-module-02-basic-sql.svg"]
+# Инженерная обложка MOD 02 Тома 2 (8 КБ)
+caption = "Инженерная карта Модуля 2: логический конвейер SQL от FROM до LIMIT, объединения JOIN и безопасный конструктор запросов в project/step02/"
+alt = "Инженерный чертёж Модуля 2: этапы выполнения SQL-запроса, JOIN, агрегация GROUP BY и keyset-пагинация"
+author = "Серия go-textbook-v2"
+license = "own"
+invert_dark = true
+
+["sql-logical-execution-order.svg"]
+# Техническая SVG-схема Тома 2 (1040×440, 7.0 КБ)
+caption = "Схема семи логических фаз выполнения SQL-запроса и области видимости вычисляемых алиасов"
+alt = "Логический порядок выполнения клауз SQL: FROM, WHERE, GROUP BY, HAVING, SELECT, DISTINCT, ORDER BY, LIMIT"
+author = "Серия go-textbook-v2"
+license = "own"
+invert_dark = true
+
+["sql-joins-row-matrix.svg"]
+# Техническая SVG-схема Тома 2 (1040×460, 5.9 КБ)
+caption = "Сравнение INNER, LEFT, RIGHT и FULL JOIN на таблицах accounts и ledger_entries с показом дублирования 1:N и NULL-строк"
+alt = "Матрица сопоставления строк при INNER JOIN, LEFT JOIN, RIGHT JOIN и FULL JOIN"
+author = "Серия go-textbook-v2"
+license = "own"
+invert_dark = true
+
+["offset-vs-keyset-pagination.svg"]
+# Техническая SVG-схема Тома 2 (1040×440, 5.1 КБ)
+caption = "Сравнение механики OFFSET и Keyset-пагинации в project/step02/query.go: работа с индексом и устойчивость при вставках"
+alt = "Сравнение линейного сканирования OFFSET и индексного перехода Keyset-пагинации"
+author = "Серия go-textbook-v2"
+license = "own"
+invert_dark = true

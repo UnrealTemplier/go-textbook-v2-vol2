@@ -1,0 +1,31 @@
+["cover-module-03-advanced-sql.svg"]
+# Инженерная обложка MOD 03 Тома 2 (8 КБ)
+caption = "Инженерная карта Модуля 3: конвейер аналитики от WITH/RECURSIVE и оконных рамок OVER до JSONB и материализованных представлений"
+alt = "Инженерный чертёж Модуля 3: CTE, рекурсивные запросы, оконные функции OVER, JSONB, триггеры и Materialized View"
+author = "Серия go-textbook-v2"
+license = "own"
+invert_dark = true
+
+["window-frame-anatomy.svg"]
+# Техническая SVG-схема Тома 2 (1040×450, 5.4 КБ)
+caption = "Схема работы WindowAgg: разделение на партиции, сортировка внутри партиции и отличие рамки ROWS от RANGE"
+alt = "Анатомия оконной функции OVER с партициями и сравнением рамок ROWS и RANGE"
+author = "Серия go-textbook-v2"
+license = "own"
+invert_dark = true
+
+["recursive-cte-tree.svg"]
+# Техническая SVG-схема Тома 2 (1040×440, 5.5 КБ)
+caption = "Итеративный алгоритм WITH RECURSIVE: якорь, WorkTable, рекурсивный шаг и защита от зацикливания графа"
+alt = "Схема работы рекурсивного CTE через якорь, WorkTable и проверку циклов"
+author = "Серия go-textbook-v2"
+license = "own"
+invert_dark = true
+
+["view-vs-materialized-view.svg"]
+# Техническая SVG-схема Тома 2 (1040×440, 5.4 КБ)
+caption = "Сравнение выполнения обычного VIEW и MATERIALIZED VIEW с обновлением REFRESH MATERIALIZED VIEW CONCURRENTLY"
+alt = "Сравнение архитектуры обычного VIEW и материализованного представления MATERIALIZED VIEW"
+author = "Серия go-textbook-v2"
+license = "own"
+invert_dark = true

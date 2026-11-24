@@ -1,0 +1,41 @@
+["ssd-flash-pages.webp"]
+# Commons: File:256GB 2230 NVME SSD + 256GB NGFF SSD.jpg; лицензия там: CC0
+caption = "Твердотельные накопители NVMe/NGFF: 16-КБ страницы InnoDB и двойная буферизация рассчитаны на блочный ввод-вывод флеш-памяти"
+alt = "Твердотельные накопители M.2 NVMe и NGFF SSD"
+author = "User5515"
+license = "CC0"
+license_url = "http://creativecommons.org/publicdomain/zero/1.0/deed.en"
+source = "https://commons.wikimedia.org/wiki/File:256GB_2230_NVME_SSD_%2B_256GB_NGFF_SSD.jpg"
+modified = "WebP (качество 80)"
+
+["cover-module-07-mysql-innodb.svg"]
+# Инженерная обложка MOD 07 Тома 2 (8 КБ)
+caption = "Инженерная карта Модуля 7: потоковая модель MySQL, кластерный первичный ключ InnoDB (16 КБ) и сравнение с PostgreSQL"
+alt = "Инженерный чертёж Модуля 7: архитектура MySQL, кластерный индекс InnoDB, Gap Locks, Binlog/GTID и форки Percona/MariaDB/Vitess"
+author = "Серия go-textbook-v2"
+license = "own"
+invert_dark = true
+
+["innodb-clustered-vs-secondary.svg"]
+# Техническая SVG-схема Тома 2 (1040×450, 5.4 КБ)
+caption = "Схема хранения данных в InnoDB: кластерный индекс с целыми строками в листьях и двойной спуск при поиске по вторичному ключу"
+alt = "Схема кластерного индекса и вторичного индекса InnoDB с двойным спуском по B+ Tree"
+author = "Серия go-textbook-v2"
+license = "own"
+invert_dark = true
+
+["innodb-buffer-pool-redo-undo.svg"]
+# Техническая SVG-схема Тома 2 (1040×450, 5.4 КБ)
+caption = "Внутренние компоненты InnoDB: Buffer Pool (New/Old LRU), Change Buffer, Doublewrite Buffer, Redo Log и Undo Log"
+alt = "Архитектурная схема InnoDB: Buffer Pool с зонами New и Old, Doublewrite Buffer, Redo Log и Undo Log"
+author = "Серия go-textbook-v2"
+license = "own"
+invert_dark = true
+
+["innodb-gap-next-key-locks.svg"]
+# Техническая SVG-схема Тома 2 (1040×440, 5.3 КБ)
+caption = "Схема областей действия Record Lock, Gap Lock и Next-Key Lock (-∞, 10], (10, 25], (25, +∞) в B+ Tree индексе InnoDB"
+alt = "Диаграмма интервалов Record Lock, Gap Lock и Next-Key Lock на оси ключей индекса InnoDB"
+author = "Серия go-textbook-v2"
+license = "own"
+invert_dark = true

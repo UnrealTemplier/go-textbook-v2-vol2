@@ -1,0 +1,78 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1040" height="460" viewBox="0 0 1040 460">
+  <defs>
+    <pattern id="grid" width="24" height="24" patternUnits="userSpaceOnUse">
+      <path d="M 24 0 L 0 0 0 24" fill="none" stroke="#e2e8f0" stroke-width="0.7"/>
+    </pattern>
+    <marker id="arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6.5" markerHeight="6.5" orient="auto-start-reverse">
+      <path d="M 0 1.5 L 8 5 L 0 8.5 z" fill="#1e293b"/>
+    </marker>
+    <marker id="arrowBlue" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6.5" markerHeight="6.5" orient="auto-start-reverse">
+      <path d="M 0 1.5 L 8 5 L 0 8.5 z" fill="#0369a1"/>
+    </marker>
+    <marker id="arrowOrange" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6.5" markerHeight="6.5" orient="auto-start-reverse">
+      <path d="M 0 1.5 L 8 5 L 0 8.5 z" fill="#c2410c"/>
+    </marker>
+  </defs>
+  <style>
+    .bg { fill: #fcfaf5; }
+    .frame { fill: none; stroke: #1e293b; stroke-width: 2; }
+    .box { fill: #ffffff; stroke: #1e293b; stroke-width: 1.8; }
+    .box-accent { fill: #f0f9ff; stroke: #0369a1; stroke-width: 2; }
+    .box-warm { fill: #fff7ed; stroke: #c2410c; stroke-width: 2; }
+    .box-dark { fill: #f1f5f9; stroke: #334155; stroke-width: 1.8; }
+    .line { fill: none; stroke: #1e293b; stroke-width: 2; }
+    .line-blue { fill: none; stroke: #0369a1; stroke-width: 2.2; }
+    .line-orange { fill: none; stroke: #c2410c; stroke-width: 2.2; }
+    .line-dash { fill: none; stroke: #64748b; stroke-width: 1.6; stroke-dasharray: 6 4; }
+    .h1 { font-family: "JetBrains Mono", "Fira Code", monospace; font-size: 19px; font-weight: 700; fill: #0f172a; }
+    .sub { font-family: "Inter", "IBM Plex Sans", sans-serif; font-size: 13.5px; fill: #334155; }
+    .mono { font-family: "JetBrains Mono", "Fira Code", monospace; font-size: 13px; fill: #0f172a; }
+    .mono-sm { font-family: "JetBrains Mono", "Fira Code", monospace; font-size: 11.5px; fill: #334155; }
+    .mono-bold { font-family: "JetBrains Mono", "Fira Code", monospace; font-size: 13.5px; font-weight: 700; fill: #0f172a; }
+    .mono-blue { font-family: "JetBrains Mono", "Fira Code", monospace; font-size: 13.5px; font-weight: 700; fill: #0369a1; }
+    .mono-orange { font-family: "JetBrains Mono", "Fira Code", monospace; font-size: 13.5px; font-weight: 700; fill: #c2410c; }
+    .label { font-family: "Inter", "IBM Plex Sans", sans-serif; font-size: 12.5px; fill: #475569; }
+  </style>
+  <rect width="1040" height="460" class="bg"/>
+  <rect x="16" y="16" width="1008" height="428" fill="url(#grid)"/>
+  <rect x="16" y="16" width="1008" height="428" class="frame"/>
+  <rect x="16" y="16" width="1008" height="58" fill="#f8fafc" stroke="#1e293b" stroke-width="1.6"/>
+  <rect x="16" y="16" width="8" height="58" fill="#0369a1"/>
+  <text x="38" y="42" class="h1">ОБЪЕКТНЫЙ ГРАФ В ПАМЯТИ ПРОТИВ РЕЛЯЦИОННЫХ МНОЖЕСТВ НА ДИСКЕ</text>
+  <text x="38" y="63" class="sub">Почему навигация по указателям в ORM порождает N+1, а реляционная алгебра работает с множествами за 1 проход</text>
+
+  <rect x="38" y="92" width="465" height="334" rx="6" class="box"/>
+  <text x="270" y="118" text-anchor="middle" class="mono-orange">ООП-ГРАФ В ПАМЯТИ (IMPEDANCE MISMATCH)</text>
+  <rect x="70" y="142" width="175" height="64" class="box-warm"/>
+  <text x="157" y="167" text-anchor="middle" class="mono-bold">User { ID: 7 }</text>
+  <text x="157" y="188" text-anchor="middle" class="label">Orders: []*Order</text>
+  <line x1="245" y1="165" x2="310" y2="148" class="line-orange" marker-end="url(#arrowOrange)"/>
+  <line x1="245" y1="185" x2="310" y2="218" class="line-orange" marker-end="url(#arrowOrange)"/>
+  <rect x="313" y="128" width="160" height="50" class="box-dark"/>
+  <text x="393" y="158" text-anchor="middle" class="mono">Order #101</text>
+  <rect x="313" y="196" width="160" height="50" class="box-dark"/>
+  <text x="393" y="226" text-anchor="middle" class="mono">Order #102</text>
+  <rect x="70" y="274" width="403" height="128" class="box-warm"/>
+  <text x="90" y="302" class="mono-orange">Цена наивного ORM-подхода:</text>
+  <text x="90" y="326" class="label">1. Цикл по указателям превращается в N+1 SQL-запросов по сети</text>
+  <text x="90" y="348" class="label">2. Чтение целых объектов тянет лишние столбцы (SELECT *)</text>
+  <text x="90" y="370" class="label">3. Размывается граница транзакций и блокировок в БД</text>
+
+  <rect x="535" y="92" width="467" height="334" rx="6" class="box-accent"/>
+  <text x="768" y="118" text-anchor="middle" class="mono-blue">РЕЛЯЦИОННЫЕ МНОЖЕСТВА (8 КБ СТРАНИЦЫ)</text>
+  <rect x="560" y="142" width="195" height="104" class="box"/>
+  <text x="657" y="166" text-anchor="middle" class="mono-blue">Relation: accounts</text>
+  <text x="575" y="192" class="mono-sm">id=7 | Alice | RUB</text>
+  <text x="575" y="214" class="mono-sm">id=8 | Bob   | RUB</text>
+  <rect x="780" y="142" width="198" height="104" class="box"/>
+  <text x="879" y="166" text-anchor="middle" class="mono-blue">Relation: entries</text>
+  <text x="795" y="192" class="mono-sm">acc=7 | -3000</text>
+  <text x="795" y="214" class="mono-sm">acc=8 | +3000</text>
+  <line x1="755" y1="194" x2="778" y2="194" class="line-blue" marker-end="url(#arrowBlue)"/>
+  <rect x="560" y="274" width="418" height="128" class="box"/>
+  <text x="580" y="302" class="mono-blue">Преимущество работы с множествами:</text>
+  <text x="580" y="326" class="label">1. Декларативный JOIN + агрегация за 1 сетевой вызов</text>
+  <text x="580" y="348" class="label">2. Buffer Pool держит горячие 8-КБ страницы в RAM (~100 нс)</text>
+  <text x="580" y="370" class="label">3. Замкнутость алгебры: результат запроса — новая таблица</text>
+
+</svg>

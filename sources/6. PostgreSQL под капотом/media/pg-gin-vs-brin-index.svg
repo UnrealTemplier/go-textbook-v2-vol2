@@ -1,0 +1,73 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1040" height="440" viewBox="0 0 1040 440">
+  <defs>
+    <pattern id="grid" width="24" height="24" patternUnits="userSpaceOnUse">
+      <path d="M 24 0 L 0 0 0 24" fill="none" stroke="#e2e8f0" stroke-width="0.7"/>
+    </pattern>
+    <marker id="arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6.5" markerHeight="6.5" orient="auto-start-reverse">
+      <path d="M 0 1.5 L 8 5 L 0 8.5 z" fill="#1e293b"/>
+    </marker>
+    <marker id="arrowBlue" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6.5" markerHeight="6.5" orient="auto-start-reverse">
+      <path d="M 0 1.5 L 8 5 L 0 8.5 z" fill="#0369a1"/>
+    </marker>
+    <marker id="arrowOrange" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6.5" markerHeight="6.5" orient="auto-start-reverse">
+      <path d="M 0 1.5 L 8 5 L 0 8.5 z" fill="#c2410c"/>
+    </marker>
+  </defs>
+  <style>
+    .bg { fill: #fcfaf5; }
+    .frame { fill: none; stroke: #1e293b; stroke-width: 2; }
+    .box { fill: #ffffff; stroke: #1e293b; stroke-width: 1.8; }
+    .box-accent { fill: #f0f9ff; stroke: #0369a1; stroke-width: 2; }
+    .box-warm { fill: #fff7ed; stroke: #c2410c; stroke-width: 2; }
+    .box-dark { fill: #f1f5f9; stroke: #334155; stroke-width: 1.8; }
+    .line { fill: none; stroke: #1e293b; stroke-width: 2; }
+    .line-blue { fill: none; stroke: #0369a1; stroke-width: 2.2; }
+    .line-orange { fill: none; stroke: #c2410c; stroke-width: 2.2; }
+    .line-dash { fill: none; stroke: #64748b; stroke-width: 1.6; stroke-dasharray: 6 4; }
+    .h1 { font-family: "JetBrains Mono", "Fira Code", monospace; font-size: 19px; font-weight: 700; fill: #0f172a; }
+    .sub { font-family: "Inter", "IBM Plex Sans", sans-serif; font-size: 13.5px; fill: #334155; }
+    .mono { font-family: "JetBrains Mono", "Fira Code", monospace; font-size: 13px; fill: #0f172a; }
+    .mono-sm { font-family: "JetBrains Mono", "Fira Code", monospace; font-size: 11.5px; fill: #334155; }
+    .mono-bold { font-family: "JetBrains Mono", "Fira Code", monospace; font-size: 13.5px; font-weight: 700; fill: #0f172a; }
+    .mono-blue { font-family: "JetBrains Mono", "Fira Code", monospace; font-size: 13.5px; font-weight: 700; fill: #0369a1; }
+    .mono-orange { font-family: "JetBrains Mono", "Fira Code", monospace; font-size: 13.5px; font-weight: 700; fill: #c2410c; }
+    .label { font-family: "Inter", "IBM Plex Sans", sans-serif; font-size: 12.5px; fill: #475569; }
+  </style>
+  <rect width="1040" height="440" class="bg"/>
+  <rect x="16" y="16" width="1008" height="408" fill="url(#grid)"/>
+  <rect x="16" y="16" width="1008" height="408" class="frame"/>
+  <rect x="16" y="16" width="1008" height="58" fill="#f8fafc" stroke="#1e293b" stroke-width="1.6"/>
+  <rect x="16" y="16" width="8" height="58" fill="#0369a1"/>
+  <text x="38" y="42" class="h1">ИНВЕРТИРОВАННЫЙ GIN ПРОТИВ СВЕРХКОМПАКТНОГО BRIN В POSTGRESQL</text>
+  <text x="38" y="63" class="sub">Почему GIN идеален для JSONB и массивов, а BRIN сжимает индекс лога на 1 ТБ до нескольких мегабайт</text>
+
+  <rect x="38" y="96" width="465" height="314" rx="6" class="box"/>
+  <text x="270" y="124" text-anchor="middle" class="mono-blue">GIN: ENTRY TREE + POSTING LISTS (JSONB / FTS)</text>
+  <rect x="62" y="148" width="175" height="90" class="box-accent"/>
+  <text x="149" y="174" text-anchor="middle" class="mono-bold">B-Tree ключей</text>
+  <text x="149" y="198" text-anchor="middle" class="mono-sm">"tier:pro"</text>
+  <text x="149" y="218" text-anchor="middle" class="mono-sm">"region:eu"</text>
+  <line x1="237" y1="193" x2="275" y2="193" class="line-blue" marker-end="url(#arrowBlue)"/>
+  <rect x="278" y="148" width="202" height="90" class="box-dark"/>
+  <text x="379" y="174" text-anchor="middle" class="mono-bold">Posting List / Tree</text>
+  <text x="379" y="198" text-anchor="middle" class="mono-sm">[(0,4), (1,9), (4,2)]</text>
+  <text x="379" y="218" text-anchor="middle" class="label">Отсортированные ctid</text>
+  <rect x="62" y="258" width="418" height="126" class="box-warm"/>
+  <text x="80" y="286" class="mono-orange">Цена записи: fastupdate + pending list</text>
+  <text x="80" y="310" class="label">Одна строка JSONB дробится на десятки токенов в GIN.</text>
+  <text x="80" y="332" class="label">Буфер pending list сливается пакетно, но может вызвать</text>
+  <text x="80" y="354" class="label">внезапный скачок задержки у несчастной транзакции.</text>
+
+  <rect x="533" y="96" width="469" height="314" rx="6" class="box-accent"/>
+  <text x="767" y="124" text-anchor="middle" class="mono-blue">BRIN: BLOCK RANGE INDEX (APPEND-ONLY ЛОГИ)</text>
+  <rect x="558" y="148" width="420" height="44" class="box"/>
+  <text x="768" y="175" text-anchor="middle" class="mono">Блоки 0..127    → min: May 01, max: May 02</text>
+  <rect x="558" y="200" width="420" height="44" class="box"/>
+  <text x="768" y="227" text-anchor="middle" class="mono">Блоки 128..255  → min: May 02, max: May 04</text>
+  <rect x="558" y="258" width="420" height="126" class="box-dark"/>
+  <text x="578" y="286" class="mono-blue">Мизерный размер (до 1000× меньше B-Tree)</text>
+  <text x="578" y="310" class="label">Хранит только границы [min, max] на каждые 128 страниц</text>
+  <text x="578" y="332" class="label">(pages_per_range). Мгновенно отбрасывает лишние диапазоны,</text>
+  <text x="578" y="354" class="label">если данные пишутся хронологически (created_at, id).</text>
+
+</svg>

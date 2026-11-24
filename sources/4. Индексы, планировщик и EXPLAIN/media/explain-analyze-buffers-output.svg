@@ -1,0 +1,60 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1040" height="460" viewBox="0 0 1040 460">
+  <defs>
+    <pattern id="grid" width="24" height="24" patternUnits="userSpaceOnUse">
+      <path d="M 24 0 L 0 0 0 24" fill="none" stroke="#e2e8f0" stroke-width="0.7"/>
+    </pattern>
+    <marker id="arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6.5" markerHeight="6.5" orient="auto-start-reverse">
+      <path d="M 0 1.5 L 8 5 L 0 8.5 z" fill="#1e293b"/>
+    </marker>
+    <marker id="arrowBlue" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6.5" markerHeight="6.5" orient="auto-start-reverse">
+      <path d="M 0 1.5 L 8 5 L 0 8.5 z" fill="#0369a1"/>
+    </marker>
+    <marker id="arrowOrange" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6.5" markerHeight="6.5" orient="auto-start-reverse">
+      <path d="M 0 1.5 L 8 5 L 0 8.5 z" fill="#c2410c"/>
+    </marker>
+  </defs>
+  <style>
+    .bg { fill: #fcfaf5; }
+    .frame { fill: none; stroke: #1e293b; stroke-width: 2; }
+    .box { fill: #ffffff; stroke: #1e293b; stroke-width: 1.8; }
+    .box-accent { fill: #f0f9ff; stroke: #0369a1; stroke-width: 2; }
+    .box-warm { fill: #fff7ed; stroke: #c2410c; stroke-width: 2; }
+    .box-dark { fill: #f1f5f9; stroke: #334155; stroke-width: 1.8; }
+    .line { fill: none; stroke: #1e293b; stroke-width: 2; }
+    .line-blue { fill: none; stroke: #0369a1; stroke-width: 2.2; }
+    .line-orange { fill: none; stroke: #c2410c; stroke-width: 2.2; }
+    .line-dash { fill: none; stroke: #64748b; stroke-width: 1.6; stroke-dasharray: 6 4; }
+    .h1 { font-family: "JetBrains Mono", "Fira Code", monospace; font-size: 19px; font-weight: 700; fill: #0f172a; }
+    .sub { font-family: "Inter", "IBM Plex Sans", sans-serif; font-size: 13.5px; fill: #334155; }
+    .mono { font-family: "JetBrains Mono", "Fira Code", monospace; font-size: 13px; fill: #0f172a; }
+    .mono-sm { font-family: "JetBrains Mono", "Fira Code", monospace; font-size: 11.5px; fill: #334155; }
+    .mono-bold { font-family: "JetBrains Mono", "Fira Code", monospace; font-size: 13.5px; font-weight: 700; fill: #0f172a; }
+    .mono-blue { font-family: "JetBrains Mono", "Fira Code", monospace; font-size: 13.5px; font-weight: 700; fill: #0369a1; }
+    .mono-orange { font-family: "JetBrains Mono", "Fira Code", monospace; font-size: 13.5px; font-weight: 700; fill: #c2410c; }
+    .label { font-family: "Inter", "IBM Plex Sans", sans-serif; font-size: 12.5px; fill: #475569; }
+  </style>
+  <rect width="1040" height="460" class="bg"/>
+  <rect x="16" y="16" width="1008" height="428" fill="url(#grid)"/>
+  <rect x="16" y="16" width="1008" height="428" class="frame"/>
+  <rect x="16" y="16" width="1008" height="58" fill="#f8fafc" stroke="#1e293b" stroke-width="1.6"/>
+  <rect x="16" y="16" width="8" height="58" fill="#0369a1"/>
+  <text x="38" y="42" class="h1">РЕАЛЬНЫЙ ВЫВОД EXPLAIN (ANALYZE, BUFFERS): ЧТО ИСКАТЬ В ПЛАНЕ</text>
+  <text x="38" y="63" class="sub">Сравнение медленного Seq Scan с отсевом 99% строк против Index-Only Scan по покрывающему индексу LedgerPulse</text>
+
+  <rect x="38" y="94" width="964" height="158" rx="6" class="box-warm"/>
+  <text x="60" y="120" class="mono-orange">ДО: Seq Scan (отброшено 499 850 строк, сотни чтений с диска)</text>
+  <rect x="60" y="132" width="920" height="104" class="box"/>
+  <text x="76" y="156" class="mono-sm">Seq Scan on ledger_entries  (cost=0.00..14820.00 rows=150 width=36) (actual time=0.14..84.31 rows=150 loops=1)</text>
+  <text x="76" y="178" class="mono-sm">  Filter: (account_id = 42 AND created_at &gt;= '2026-05-01')</text>
+  <text x="76" y="200" class="mono-orange">  Rows Removed by Filter: 499850</text>
+  <text x="76" y="222" class="mono-sm">  Buffers: shared hit=3120 read=5450   &lt;-- вымывает Buffer Pool!</text>
+
+  <rect x="38" y="270" width="964" height="162" rx="6" class="box-accent"/>
+  <text x="60" y="296" class="mono-blue">ПОСЛЕ: Index-Only Scan по idx_ledger_entries_account_created (... INCLUDE (amount, currency))</text>
+  <rect x="60" y="308" width="920" height="108" class="box"/>
+  <text x="76" y="332" class="mono-sm">Limit  (cost=0.43..12.85 rows=50 width=36) (actual time=0.032..0.095 rows=50 loops=1)</text>
+  <text x="76" y="354" class="mono-sm">  -&gt; Index Only Scan using idx_ledger_entries_account_created on ledger_entries</text>
+  <text x="76" y="376" class="mono-blue">       Index Cond: (account_id = 42 AND created_at &lt; '2026-05-10')   |   Heap Fetches: 0</text>
+  <text x="76" y="398" class="mono-sm">       Buffers: shared hit=5   &lt;-- 887× меньше затронутых страниц, 0 обращений к диску</text>
+
+</svg>

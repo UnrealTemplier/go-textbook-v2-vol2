@@ -1,0 +1,110 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="675" viewBox="0 0 1200 675">
+  <defs>
+    <pattern id="minorGrid" width="25" height="25" patternUnits="userSpaceOnUse">
+      <path d="M 25 0 L 0 0 0 25" fill="none" stroke="#e2e8f0" stroke-width="0.8"/>
+    </pattern>
+    <pattern id="majorGrid" width="125" height="125" patternUnits="userSpaceOnUse">
+      <rect width="125" height="125" fill="url(#minorGrid)"/>
+      <path d="M 125 0 L 0 0 0 125" fill="none" stroke="#cbd5e1" stroke-width="1.4"/>
+    </pattern>
+    <marker id="arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M 0 1.5 L 8 5 L 0 8.5 z" fill="#1e293b"/>
+    </marker>
+    <marker id="arrowBlue" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M 0 1.5 L 8 5 L 0 8.5 z" fill="#0369a1"/>
+    </marker>
+    <marker id="arrowOrange" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M 0 1.5 L 8 5 L 0 8.5 z" fill="#c2410c"/>
+    </marker>
+  </defs>
+  <style>
+    .bg { fill: #fcfaf5; }
+    .frame { fill: none; stroke: #1e293b; stroke-width: 2.5; }
+    .inner-frame { fill: none; stroke: #475569; stroke-width: 1; }
+    .box { fill: #ffffff; stroke: #1e293b; stroke-width: 2; }
+    .box-accent { fill: #f0f9ff; stroke: #0369a1; stroke-width: 2.2; }
+    .box-warm { fill: #fff7ed; stroke: #c2410c; stroke-width: 2.2; }
+    .box-dark { fill: #f1f5f9; stroke: #334155; stroke-width: 2; }
+    .line { fill: none; stroke: #1e293b; stroke-width: 2.2; }
+    .line-blue { fill: none; stroke: #0369a1; stroke-width: 2.4; }
+    .line-orange { fill: none; stroke: #c2410c; stroke-width: 2.4; }
+    .line-dash { fill: none; stroke: #64748b; stroke-width: 1.6; stroke-dasharray: 6 4; }
+    .title { font-family: "JetBrains Mono", "Fira Code", monospace; font-size: 23px; font-weight: 700; fill: #0f172a; }
+    .sub { font-family: "Inter", "IBM Plex Sans", sans-serif; font-size: 15px; fill: #334155; }
+    .mono { font-family: "JetBrains Mono", "Fira Code", monospace; font-size: 14px; fill: #0f172a; }
+    .mono-bold { font-family: "JetBrains Mono", "Fira Code", monospace; font-size: 15px; font-weight: 700; fill: #0f172a; }
+    .mono-blue { font-family: "JetBrains Mono", "Fira Code", monospace; font-size: 14px; font-weight: 700; fill: #0369a1; }
+    .mono-orange { font-family: "JetBrains Mono", "Fira Code", monospace; font-size: 14px; font-weight: 700; fill: #c2410c; }
+    .label { font-family: "Inter", "IBM Plex Sans", sans-serif; font-size: 13px; fill: #475569; }
+    .stamp { font-family: "JetBrains Mono", "Fira Code", monospace; font-size: 11px; fill: #475569; letter-spacing: 0.5px; }
+  </style>
+  <rect width="1200" height="675" class="bg"/>
+  <rect x="25" y="25" width="1150" height="625" fill="url(#majorGrid)"/>
+  <rect x="25" y="25" width="1150" height="625" class="frame"/>
+  <rect x="31" y="31" width="1138" height="613" class="inner-frame"/>
+
+  <rect x="60" y="135" width="520" height="235" rx="6" class="box"/>
+  <text x="85" y="165" class="mono-blue">ДОЛГОВЕЧНОСТЬ: ПОСЛЕДОВАТЕЛЬНЫЙ WAL ПРОТИВ СЛУЧАЙНЫХ СТРАНИЦ</text>
+  <rect x="85" y="188" width="150" height="62" class="box-accent"/>
+  <text x="160" y="215" text-anchor="middle" class="mono-bold">COMMIT Tx</text>
+  <text x="160" y="235" text-anchor="middle" class="label">LSN + CRC32</text>
+  <line x1="235" y1="219" x2="275" y2="219" class="line-orange" marker-end="url(#arrowOrange)"/>
+  <rect x="278" y="188" width="275" height="62" class="box-warm"/>
+  <text x="415" y="213" text-anchor="middle" class="mono-orange">WAL (Append-Only + fsync)</text>
+  <text x="415" y="233" text-anchor="middle" class="label">1 последовательная запись → безопасно</text>
+  <rect x="85" y="275" width="215" height="72" class="box-dark"/>
+  <text x="192" y="303" text-anchor="middle" class="mono-bold">Buffer Pool (RAM)</text>
+  <text x="192" y="324" text-anchor="middle" class="label">Грязные страницы 8 КБ</text>
+  <line x1="300" y1="311" x2="345" y2="311" class="line-dash" marker-end="url(#arrow)"/>
+  <rect x="348" y="275" width="205" height="72" class="box-dark"/>
+  <text x="450" y="303" text-anchor="middle" class="mono-bold">Checkpoint → Heap</text>
+  <text x="450" y="324" text-anchor="middle" class="label">Фоновый сброс на диск</text>
+
+  <rect x="615" y="135" width="525" height="235" rx="6" class="box"/>
+  <text x="640" y="165" class="mono-blue">MVCC: ЧИТАТЕЛИ НЕ БЛОКИРУЮТ ПИСАТЕЛЕЙ</text>
+  <rect x="640" y="188" width="230" height="74" class="box-accent"/>
+  <text x="755" y="213" text-anchor="middle" class="mono-bold">Версия v1 (xmin=10, xmax=15)</text>
+  <text x="755" y="234" text-anchor="middle" class="label">Видна снимку XID 12</text>
+  <line x1="870" y1="225" x2="905" y2="225" class="line-blue" marker-end="url(#arrowBlue)"/>
+  <rect x="908" y="188" width="208" height="74" class="box-warm"/>
+  <text x="1012" y="213" text-anchor="middle" class="mono-orange">Версия v2 (xmin=15, xmax=0)</text>
+  <text x="1012" y="234" text-anchor="middle" class="label">Видна новым транзакциям</text>
+  <rect x="640" y="278" width="476" height="68" class="box-dark"/>
+  <text x="878" y="305" text-anchor="middle" class="mono-bold">project/step05/mvcc_wal.go — WALStore + MVCCEngine + HasDeadlockCycle</text>
+  <text x="878" y="326" text-anchor="middle" class="label">Восстановление ARIES (Analysis → Redo → Undo), VACUUM и SSI</text>
+
+  <rect x="60" y="395" width="1080" height="170" rx="6" class="box"/>
+  <text x="85" y="425" class="mono-bold">ИЗОЛЯЦИЯ, АНОМАЛИИ И ПРОФИЛАКТИКА DEADLOCK</text>
+  <rect x="85" y="446" width="240" height="98" class="box-dark"/>
+  <text x="205" y="472" text-anchor="middle" class="mono-bold">Read Committed</text>
+  <text x="205" y="496" text-anchor="middle" class="label">Новый снимок на каждый</text>
+  <text x="205" y="516" text-anchor="middle" class="label">запрос в транзакции</text>
+  <rect x="350" y="446" width="240" height="98" class="box-accent"/>
+  <text x="470" y="472" text-anchor="middle" class="mono-blue">Snapshot Isolation</text>
+  <text x="470" y="496" text-anchor="middle" class="label">First-Committer-Wins,</text>
+  <text x="470" y="516" text-anchor="middle" class="label">остаётся риск Write Skew</text>
+  <rect x="615" y="446" width="240" height="98" class="box-warm"/>
+  <text x="735" y="472" text-anchor="middle" class="mono-orange">Serializable (SSI)</text>
+  <text x="735" y="496" text-anchor="middle" class="label">Предикатные замки SIREAD</text>
+  <text x="735" y="516" text-anchor="middle" class="label">ловят циклы rw-зависимостей</text>
+  <rect x="880" y="446" width="235" height="98" class="box-dark"/>
+  <text x="997" y="472" text-anchor="middle" class="mono-bold">2PL &amp; SKIP LOCKED</text>
+  <text x="997" y="496" text-anchor="middle" class="label">Порядок id1 &lt; id2</text>
+  <text x="997" y="516" text-anchor="middle" class="label">и граф ожиданий DFS</text>
+
+  <rect x="31" y="31" width="1138" height="68" fill="#f8fafc" stroke="#1e293b" stroke-width="1.5"/>
+  <rect x="31" y="31" width="135" height="68" fill="#0369a1"/>
+  <text x="98" y="72" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="22" font-weight="700" fill="#ffffff">MOD 05</text>
+  <text x="188" y="61" class="title">ТРАНЗАКЦИИ, ACID, MVCC, БЛОКИРОВКИ И ЖУРНАЛ WAL</text>
+  <text x="188" y="84" class="sub">12 глав: аномалии изоляции, 2PL и Deadlock, многоверсионность, последовательный WAL, ARIES, VACUUM и SSI</text>
+
+  <rect x="775" y="592" width="394" height="52" fill="#f8fafc" stroke="#1e293b" stroke-width="1.5"/>
+  <line x1="910" y1="592" x2="910" y2="644" stroke="#475569" stroke-width="1"/>
+  <line x1="1060" y1="592" x2="1060" y2="644" stroke="#475569" stroke-width="1"/>
+  <text x="842" y="613" text-anchor="middle" class="stamp">GO-TEXTBOOK-V2</text>
+  <text x="842" y="632" text-anchor="middle" class="mono-blue">VOL.2 · GO 1.24</text>
+  <text x="985" y="613" text-anchor="middle" class="stamp">ЛИСТ / ЧЕРТЁЖ</text>
+  <text x="985" y="632" text-anchor="middle" class="mono">MOD 05</text>
+  <text x="1115" y="613" text-anchor="middle" class="stamp">МАСШТАБ</text>
+  <text x="1115" y="632" text-anchor="middle" class="mono">1 : 1</text>
+</svg>

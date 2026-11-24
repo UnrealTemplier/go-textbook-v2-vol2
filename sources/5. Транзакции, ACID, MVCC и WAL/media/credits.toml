@@ -1,0 +1,49 @@
+["raid-controller-bbu.webp"]
+# Commons: File:ServeRAID 6M controller - IMG 3452.jpg; лицензия там: CC BY 2.0
+caption = "Серверный RAID-контроллер с энергонезависимым кэшем: аппаратный уровень, от которого зависит честность системного вызова fsync для WAL"
+alt = "Серверный RAID-контроллер хранения с модулем кэш-памяти"
+author = "Jemimus"
+license = "CC BY 2.0"
+license_url = "https://creativecommons.org/licenses/by/2.0"
+source = "https://commons.wikimedia.org/wiki/File:ServeRAID_6M_controller_-_IMG_3452.jpg"
+modified = "уменьшено до 1200 px по длинной стороне, WebP (качество 80)"
+
+["cover-module-05-transactions-mvcc-wal.svg"]
+# Инженерная обложка MOD 05 Тома 2 (8 КБ)
+caption = "Инженерная карта Модуля 5: путь записи через WAL с fsync(), многоверсионный контроль MVCC и предотвращение Write Skew"
+alt = "Инженерный чертёж Модуля 5: ACID, уровни изоляции, MVCC-версии, WAL с CRC32, Checkpointing и восстановление ARIES"
+author = "Серия go-textbook-v2"
+license = "own"
+invert_dark = true
+
+["mvcc-xmin-xmax-timeline.svg"]
+# Техническая SVG-схема Тома 2 (1040×450, 5.6 КБ)
+caption = "Шкала времени MVCC: видимость кортежей по xmin/xmax для транзакций с разными снимками (Snapshot Isolation)"
+alt = "Таймлайн MVCC с версиями кортежа xmin и xmax и видимостью для двух параллельных транзакций"
+author = "Серия go-textbook-v2"
+license = "own"
+invert_dark = true
+
+["wal-sequential-vs-heap-random.svg"]
+# Техническая SVG-схема Тома 2 (1040×450, 6.0 КБ)
+caption = "Схема работы WAL, буферного пула, Checkpointer и трёх фаз восстановления ARIES (Analysis → Redo → Undo)"
+alt = "Схема записи транзакции в WAL, грязных страниц в Buffer Pool и восстановления ARIES"
+author = "Серия go-textbook-v2"
+license = "own"
+invert_dark = true
+
+["isolation-anomalies-matrix.svg"]
+# Техническая SVG-схема Тома 2 (1040×440, 6.3 КБ)
+caption = "Сводная матрица аномалий (Dirty Read, Non-Repeatable Read, Phantom Read, Lost Update, Write Skew) по уровням изоляции PostgreSQL и InnoDB"
+alt = "Таблица уровней изоляции транзакций и допускаемых ими аномалий конкурентности"
+author = "Серия go-textbook-v2"
+license = "own"
+invert_dark = true
+
+["deadlock-wait-for-graph.svg"]
+# Техническая SVG-схема Тома 2 (1040×440, 5.8 КБ)
+caption = "Граф ожиданий Wait-For Graph при встречной блокировке счетов и устранение цикла через упорядоченный захват ресурсов"
+alt = "Схема возникновения Deadlock в графе ожиданий и его устранение через канонический порядок блокировок"
+author = "Серия go-textbook-v2"
+license = "own"
+invert_dark = true

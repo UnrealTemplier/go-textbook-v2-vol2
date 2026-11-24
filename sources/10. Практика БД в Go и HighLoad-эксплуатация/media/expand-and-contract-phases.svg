@@ -1,0 +1,85 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1040" height="440" viewBox="0 0 1040 440">
+  <defs>
+    <pattern id="grid" width="24" height="24" patternUnits="userSpaceOnUse">
+      <path d="M 24 0 L 0 0 0 24" fill="none" stroke="#e2e8f0" stroke-width="0.7"/>
+    </pattern>
+    <marker id="arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6.5" markerHeight="6.5" orient="auto-start-reverse">
+      <path d="M 0 1.5 L 8 5 L 0 8.5 z" fill="#1e293b"/>
+    </marker>
+    <marker id="arrowBlue" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6.5" markerHeight="6.5" orient="auto-start-reverse">
+      <path d="M 0 1.5 L 8 5 L 0 8.5 z" fill="#0369a1"/>
+    </marker>
+    <marker id="arrowOrange" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6.5" markerHeight="6.5" orient="auto-start-reverse">
+      <path d="M 0 1.5 L 8 5 L 0 8.5 z" fill="#c2410c"/>
+    </marker>
+  </defs>
+  <style>
+    .bg { fill: #fcfaf5; }
+    .frame { fill: none; stroke: #1e293b; stroke-width: 2; }
+    .box { fill: #ffffff; stroke: #1e293b; stroke-width: 1.8; }
+    .box-accent { fill: #f0f9ff; stroke: #0369a1; stroke-width: 2; }
+    .box-warm { fill: #fff7ed; stroke: #c2410c; stroke-width: 2; }
+    .box-dark { fill: #f1f5f9; stroke: #334155; stroke-width: 1.8; }
+    .line { fill: none; stroke: #1e293b; stroke-width: 2; }
+    .line-blue { fill: none; stroke: #0369a1; stroke-width: 2.2; }
+    .line-orange { fill: none; stroke: #c2410c; stroke-width: 2.2; }
+    .line-dash { fill: none; stroke: #64748b; stroke-width: 1.6; stroke-dasharray: 6 4; }
+    .h1 { font-family: "JetBrains Mono", "Fira Code", monospace; font-size: 19px; font-weight: 700; fill: #0f172a; }
+    .sub { font-family: "Inter", "IBM Plex Sans", sans-serif; font-size: 13.5px; fill: #334155; }
+    .mono { font-family: "JetBrains Mono", "Fira Code", monospace; font-size: 13px; fill: #0f172a; }
+    .mono-sm { font-family: "JetBrains Mono", "Fira Code", monospace; font-size: 11.5px; fill: #334155; }
+    .mono-bold { font-family: "JetBrains Mono", "Fira Code", monospace; font-size: 13.5px; font-weight: 700; fill: #0f172a; }
+    .mono-blue { font-family: "JetBrains Mono", "Fira Code", monospace; font-size: 13.5px; font-weight: 700; fill: #0369a1; }
+    .mono-orange { font-family: "JetBrains Mono", "Fira Code", monospace; font-size: 13.5px; font-weight: 700; fill: #c2410c; }
+    .label { font-family: "Inter", "IBM Plex Sans", sans-serif; font-size: 12.5px; fill: #475569; }
+  </style>
+  <rect width="1040" height="440" class="bg"/>
+  <rect x="16" y="16" width="1008" height="408" fill="url(#grid)"/>
+  <rect x="16" y="16" width="1008" height="408" class="frame"/>
+  <rect x="16" y="16" width="1008" height="58" fill="#f8fafc" stroke="#1e293b" stroke-width="1.6"/>
+  <rect x="16" y="16" width="8" height="58" fill="#0369a1"/>
+  <text x="38" y="42" class="h1">МИГРАЦИИ БЕЗ ПРОСТОЯ: ЧЕТЫРЕ ШАГА EXPAND-AND-CONTRACT</text>
+  <text x="38" y="63" class="sub">Как переименовать или изменить столбец на живой базе, пока в Kubernetes одновременно работают версии кода N и N+1</text>
+
+  <rect x="38" y="96" width="225" height="225" rx="6" class="box-accent"/>
+  <text x="150" y="124" text-anchor="middle" class="mono-blue">1. EXPAND (БД)</text>
+  <text x="55" y="158" class="mono-sm">ADD COLUMN new_col</text>
+  <text x="55" y="180" class="mono-sm">  NULL (без lock!)</text>
+  <text x="55" y="210" class="label">Версия N ничего не</text>
+  <text x="55" y="230" class="label">знает о new_col и</text>
+  <text x="55" y="250" class="label">продолжает работать.</text>
+
+  <line x1="263" y1="208" x2="288" y2="208" class="line-blue" marker-end="url(#arrowBlue)"/>
+
+  <rect x="291" y="96" width="225" height="225" rx="6" class="box"/>
+  <text x="403" y="124" text-anchor="middle" class="mono-bold">2. DUAL-WRITE (N+1)</text>
+  <text x="308" y="158" class="mono-sm">Код N+1 пишет в</text>
+  <text x="308" y="180" class="mono-sm">old_col и new_col</text>
+  <text x="308" y="210" class="label">Батчевый backfill</text>
+  <text x="308" y="230" class="label">старых строк порциями</text>
+  <text x="308" y="250" class="label">по PK с паузами.</text>
+
+  <line x1="516" y1="208" x2="541" y2="208" class="line-blue" marker-end="url(#arrowBlue)"/>
+
+  <rect x="544" y="96" width="225" height="225" rx="6" class="box-dark"/>
+  <text x="656" y="124" text-anchor="middle" class="mono-bold">3. SWITCH READ (N+2)</text>
+  <text x="561" y="158" class="mono-sm">CHECK NOT VALID →</text>
+  <text x="561" y="180" class="mono-sm">VALIDATE CONSTRAINT</text>
+  <text x="561" y="210" class="label">Чтение переключено на</text>
+  <text x="561" y="230" class="label">new_col; old_col больше</text>
+  <text x="561" y="250" class="label">не запрашивается.</text>
+
+  <line x1="769" y1="208" x2="794" y2="208" class="line-orange" marker-end="url(#arrowOrange)"/>
+
+  <rect x="797" y="96" width="205" height="225" rx="6" class="box-warm"/>
+  <text x="899" y="124" text-anchor="middle" class="mono-orange">4. CONTRACT (БД)</text>
+  <text x="812" y="158" class="mono-sm">DROP COLUMN old_col</text>
+  <text x="812" y="180" class="mono-sm">с lock_timeout='2s'</text>
+  <text x="812" y="210" class="label">Только после полного</text>
+  <text x="812" y="230" class="label">ухода всех подов N.</text>
+
+  <rect x="38" y="338" width="964" height="78" rx="6" class="box-dark"/>
+  <text x="60" y="366" class="mono-bold">Золотое правило: НИКОГДА не делайте RENAME COLUMN или NOT NULL на горячей таблице за 1 миграцию —</text>
+  <text x="60" y="390" class="label">используйте SET lock_timeout, CREATE INDEX CONCURRENTLY и явный список колонок вместо SELECT * в Go.</text>
+
+</svg>

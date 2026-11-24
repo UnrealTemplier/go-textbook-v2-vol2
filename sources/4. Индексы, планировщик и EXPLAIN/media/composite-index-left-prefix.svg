@@ -1,0 +1,66 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1040" height="440" viewBox="0 0 1040 440">
+  <defs>
+    <pattern id="grid" width="24" height="24" patternUnits="userSpaceOnUse">
+      <path d="M 24 0 L 0 0 0 24" fill="none" stroke="#e2e8f0" stroke-width="0.7"/>
+    </pattern>
+    <marker id="arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6.5" markerHeight="6.5" orient="auto-start-reverse">
+      <path d="M 0 1.5 L 8 5 L 0 8.5 z" fill="#1e293b"/>
+    </marker>
+    <marker id="arrowBlue" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6.5" markerHeight="6.5" orient="auto-start-reverse">
+      <path d="M 0 1.5 L 8 5 L 0 8.5 z" fill="#0369a1"/>
+    </marker>
+    <marker id="arrowOrange" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6.5" markerHeight="6.5" orient="auto-start-reverse">
+      <path d="M 0 1.5 L 8 5 L 0 8.5 z" fill="#c2410c"/>
+    </marker>
+  </defs>
+  <style>
+    .bg { fill: #fcfaf5; }
+    .frame { fill: none; stroke: #1e293b; stroke-width: 2; }
+    .box { fill: #ffffff; stroke: #1e293b; stroke-width: 1.8; }
+    .box-accent { fill: #f0f9ff; stroke: #0369a1; stroke-width: 2; }
+    .box-warm { fill: #fff7ed; stroke: #c2410c; stroke-width: 2; }
+    .box-dark { fill: #f1f5f9; stroke: #334155; stroke-width: 1.8; }
+    .line { fill: none; stroke: #1e293b; stroke-width: 2; }
+    .line-blue { fill: none; stroke: #0369a1; stroke-width: 2.2; }
+    .line-orange { fill: none; stroke: #c2410c; stroke-width: 2.2; }
+    .line-dash { fill: none; stroke: #64748b; stroke-width: 1.6; stroke-dasharray: 6 4; }
+    .h1 { font-family: "JetBrains Mono", "Fira Code", monospace; font-size: 19px; font-weight: 700; fill: #0f172a; }
+    .sub { font-family: "Inter", "IBM Plex Sans", sans-serif; font-size: 13.5px; fill: #334155; }
+    .mono { font-family: "JetBrains Mono", "Fira Code", monospace; font-size: 13px; fill: #0f172a; }
+    .mono-sm { font-family: "JetBrains Mono", "Fira Code", monospace; font-size: 11.5px; fill: #334155; }
+    .mono-bold { font-family: "JetBrains Mono", "Fira Code", monospace; font-size: 13.5px; font-weight: 700; fill: #0f172a; }
+    .mono-blue { font-family: "JetBrains Mono", "Fira Code", monospace; font-size: 13.5px; font-weight: 700; fill: #0369a1; }
+    .mono-orange { font-family: "JetBrains Mono", "Fira Code", monospace; font-size: 13.5px; font-weight: 700; fill: #c2410c; }
+    .label { font-family: "Inter", "IBM Plex Sans", sans-serif; font-size: 12.5px; fill: #475569; }
+  </style>
+  <rect width="1040" height="440" class="bg"/>
+  <rect x="16" y="16" width="1008" height="408" fill="url(#grid)"/>
+  <rect x="16" y="16" width="1008" height="408" class="frame"/>
+  <rect x="16" y="16" width="1008" height="58" fill="#f8fafc" stroke="#1e293b" stroke-width="1.6"/>
+  <rect x="16" y="16" width="8" height="58" fill="#0369a1"/>
+  <text x="38" y="42" class="h1">СОСТАВНОЙ ИНДЕКС (account_id, created_at, id) И ПРАВИЛО ESR</text>
+  <text x="38" y="63" class="sub">Лексикографическая сортировка ключей: почему фильтр без ведущего столбца не попадает в индексный поиск</text>
+
+  <rect x="38" y="94" width="490" height="316" rx="6" class="box"/>
+  <text x="283" y="122" text-anchor="middle" class="mono-blue">ЛЕКСИКОГРАФИЧЕСКИЙ ПОРЯДОК В B+ TREE</text>
+  <rect x="60" y="142" width="445" height="34" class="box-accent"/><text x="76" y="164" class="mono">(acc=1, 2026-05-02, id=9)  ← непрерывный блок</text>
+  <rect x="60" y="180" width="445" height="34" class="box-accent"/><text x="76" y="202" class="mono">(acc=1, 2026-05-01, id=4)  ← для acc=1</text>
+  <rect x="60" y="218" width="445" height="34" class="box-dark"/><text x="76" y="240" class="mono">(acc=2, 2026-05-03, id=11)</text>
+  <rect x="60" y="256" width="445" height="34" class="box-dark"/><text x="76" y="278" class="mono">(acc=2, 2026-05-01, id=2)</text>
+  <rect x="60" y="294" width="445" height="34" class="box-dark"/><text x="76" y="316" class="mono">(acc=3, 2026-05-02, id=8)</text>
+  <text x="60" y="358" class="label">WHERE created_at = '2026-05-01' без account_id разбросан</text>
+  <text x="60" y="378" class="label">по разным частям дерева → нужен отдельный индекс или Skip Scan.</text>
+
+  <rect x="556" y="94" width="446" height="316" rx="6" class="box"/>
+  <text x="779" y="122" text-anchor="middle" class="mono-orange">ЗОЛОТОЕ ПРАВИЛО ПОРЯДКА: E → S → R</text>
+  <rect x="580" y="146" width="398" height="72" class="box-accent"/>
+  <text x="598" y="172" class="mono-blue">1. Equality (=): account_id = $1</text>
+  <text x="598" y="196" class="label">Фиксирует узкую ветку дерева; дальше ключи отсортированы!</text>
+  <rect x="580" y="230" width="398" height="72" class="box-dark"/>
+  <text x="598" y="256" class="mono-bold">2. Sort (ORDER BY) / 3. Range (&lt;, &gt;)</text>
+  <text x="598" y="280" class="label">created_at DESC, id DESC для keyset-курсора</text>
+  <rect x="580" y="314" width="398" height="74" class="box-warm"/>
+  <text x="598" y="340" class="mono-orange">Если поставить Range раньше Equality:</text>
+  <text x="598" y="364" class="label">после диапазона порядок по следующему полю теряется.</text>
+
+</svg>
