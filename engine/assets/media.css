@@ -77,10 +77,10 @@
 }
 
 /* invert_dark = true в credits.toml: чёрно-белая схема на белом фоне инвертируется в темах
-   с тёмным листом статьи. Светлый лист — light, paper, vintage, retro-manual, modern-manual. */
+   с тёмным листом статьи — и в тексте, и в окне увеличения. Светлый лист — light, paper, vintage, retro-manual, modern-manual. */
 :is([data-theme="slate"], [data-theme="mirage"], [data-theme="night"], [data-theme="groove"],
     [data-theme="amber"], [data-theme="synthwave"], [data-theme="cyberpunk"], [data-theme="retro-green"],
-    [data-theme="retro-amber"], [data-theme="retro-gaming"]) .article-markdown img.md-invert-dark {
+    [data-theme="retro-amber"], [data-theme="retro-gaming"]) :is(.article-markdown, .md-lightbox-body) img.md-invert-dark {
   filter: invert(1) hue-rotate(180deg);
 }
 

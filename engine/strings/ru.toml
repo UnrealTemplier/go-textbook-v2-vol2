@@ -82,6 +82,7 @@ card_mermaid = "📐 {n} схем"
 card_sections = "📁 {n} тем"
 card_basic = "📖 Базовый курс"
 card_start = "Начать изучение →"
+roadmap_current = "Вы здесь"
 
 # Изображения ([media] в book.toml): атрибуция в подписи, окно увеличения, страница «Иллюстрации и лицензии»
 [media]

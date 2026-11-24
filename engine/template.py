@@ -718,6 +718,36 @@ def render_article_page(
 </html>
 """
 
+def _render_roadmap_step(st: Dict[str, Any], config: BookConfig) -> str:
+    """Карточка шага дорожной карты на главной; current = true выделяет текущий том."""
+    badge = st["badge"]
+    title_html = st["title_html"]
+    text_html = st["text_html"]
+    if st.get("current"):
+        current_label = config.t("index.roadmap_current")
+        return (
+            '        <li class="roadmap-step is-current" aria-current="step">\n'
+            '          <div class="step-header">\n'
+            f'            <span class="step-badge">{badge}</span>\n'
+            f'            <span class="step-current-badge">{current_label}</span>\n'
+            '          </div>\n'
+            '          <div class="step-content">\n'
+            f'            <h4>{title_html}</h4>\n'
+            f'            <p>{text_html}</p>\n'
+            '          </div>\n'
+            '        </li>'
+        )
+    return (
+        '        <li class="roadmap-step">\n'
+        f'          <span class="step-badge">{badge}</span>\n'
+        '          <div class="step-content">\n'
+        f'            <h4>{title_html}</h4>\n'
+        f'            <p>{text_html}</p>\n'
+        '          </div>\n'
+        '        </li>'
+    )
+
+
 def render_index_page(
     modules_tree: List[Dict[str, Any]],
     total_articles: int,
@@ -740,14 +770,7 @@ def render_index_page(
           <span class="stat-number">{fc(st['value'])}</span>
           <span class="stat-desc">{fc(st['label'])}</span>
         </div>""" for st in ip.stats)
-    steps_html = "\n".join(
-        f"""        <li class="roadmap-step">
-          <span class="step-badge">{st['badge']}</span>
-          <div class="step-content">
-            <h4>{st['title_html']}</h4>
-            <p>{st['text_html']}</p>
-          </div>
-        </li>""" for st in ip.roadmap_steps)
+    steps_html = "\n".join(_render_roadmap_step(st, config) for st in ip.roadmap_steps)
 
     ctx = {
         "hero_badge": fc(ip.hero_badge_html),

@@ -50,6 +50,8 @@ class LoadConfigTest(unittest.TestCase):
             '[project\n',
             '[index_page]\nstats = [{ value = "1" }]\n',
             '[index_page]\nroadmap_steps = [{ badge = "1", title_html = "t" }]\n',
+            '[index_page]\nroadmap_steps = [{ badge = "1", title_html = "t", text_html = "x", current = "yes" }]\n',
+            '[index_page]\nroadmap_steps = [{ badge = "1", title_html = "t", text_html = "x", extra = 1 }]\n',
             '[branding]\nlogo = "x"\n',
         ]
         for text in bad:
@@ -76,6 +78,30 @@ class LoadConfigTest(unittest.TestCase):
                 self.assertIsInstance(load_config(), BookConfig)
             finally:
                 os.chdir(cwd)
+
+    def test_roadmap_current_step(self):
+        from engine.template import render_index_page
+        cfg = self.load(
+            '[project]\nversion = "1.0.0"\n'
+            '[index_page]\n'
+            'roadmap_steps = [\n'
+            '  { badge = "Том 1", title_html = "Первый", text_html = "Описание 1" },\n'
+            '  { badge = "Том 2", title_html = "Второй", text_html = "Описание 2", current = true },\n'
+            ']\n'
+        )
+        html_out = render_index_page([], 0, 0, "1.0.0", cfg)
+        self.assertIn('<li class="roadmap-step">\n          <span class="step-badge">Том 1</span>', html_out)
+        self.assertIn('<li class="roadmap-step is-current" aria-current="step">', html_out)
+        self.assertIn('<span class="step-current-badge">Вы здесь</span>', html_out)
+
+        cfg_custom = self.load(
+            '[project]\nversion = "1.0.0"\n'
+            '[strings.index]\nroadmap_current = "Текущий том"\n'
+            '[index_page]\n'
+            'roadmap_steps = [{ badge = "Том 1", title_html = "Первый", text_html = "Описание", current = true }]\n'
+        )
+        custom_out = render_index_page([], 0, 0, "1.0.0", cfg_custom)
+        self.assertIn('<span class="step-current-badge">Текущий том</span>', custom_out)
 
 
 if __name__ == "__main__":

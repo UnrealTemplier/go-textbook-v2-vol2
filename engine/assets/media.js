@@ -61,6 +61,7 @@
     ['width', 'height'].forEach(function (a) {
       if (src.hasAttribute(a)) view.setAttribute(a, src.getAttribute(a)); else view.removeAttribute(a);
     });
+    view.classList.toggle('md-invert-dark', src.classList.contains('md-invert-dark'));
     view.alt = src.alt;
     view.onload = layout;
     view.src = src.currentSrc || src.src;
@@ -88,6 +89,7 @@
     modal.setAttribute('aria-hidden', 'true');
     document.body.style.overflow = '';
     view.onload = null;
+    view.classList.remove('md-invert-dark');
     if (opener) opener.focus();
     opener = null;
   }

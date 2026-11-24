@@ -191,7 +191,7 @@ class IndexPageConfig:
     catalog_title_html: str = ""
     catalog_sub_html: str = ""
     roadmap_title_html: str = ""
-    roadmap_steps: List[Dict[str, str]] = field(default_factory=list)  # [{badge, title_html, text_html}]
+    roadmap_steps: List[Dict[str, Any]] = field(default_factory=list)  # [{badge, title_html, text_html, current?}]
     footer_html: List[str] = field(default_factory=list)
 
 
@@ -319,8 +319,14 @@ def _validate(cfg: BookConfig) -> None:
         if not isinstance(st, dict) or set(st) != {"value", "label"}:
             raise ConfigError(f"index_page.stats[{i}]: ожидаются ключи value и label")
     for i, st in enumerate(cfg.index_page.roadmap_steps):
-        if not isinstance(st, dict) or set(st) != {"badge", "title_html", "text_html"}:
-            raise ConfigError(f"index_page.roadmap_steps[{i}]: ожидаются ключи badge, title_html, text_html")
+        if (not isinstance(st, dict)
+                or not {"badge", "title_html", "text_html"}.issubset(st)
+                or not set(st).issubset({"badge", "title_html", "text_html", "current"})
+                or ("current" in st and not isinstance(st["current"], bool))):
+            raise ConfigError(
+                f"index_page.roadmap_steps[{i}]: ожидаются ключи badge, title_html, text_html "
+                "(и необязательный current = true/false)"
+            )
     if cfg.audit.path_max <= 0:
         raise ConfigError("audit.path_max: ожидается положительное число")
     merge_strings(cfg.strings)

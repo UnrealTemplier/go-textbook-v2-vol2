@@ -2,6 +2,15 @@
 
 У каждой версии — пометка «меняет вывод»: изменится ли HTML книги после `engine.sync`.
 
+## 1.19.0 (2026-11-24)
+
+Исправление инверсии изображений в полноэкранном просмотре и новая возможность выделения текущего шага в дорожной карте главной страницы (`index_page.roadmap_steps`). Несовместимости `book.toml` нет: новый ключ `current` необязательный (`false` по умолчанию).
+
+Сводка «меняет вывод»: **да (кэш-бастинг `?v=`)** — меняется содержимое `assets/style.css` (и `assets/media.css`, `assets/media.js` у книг с `[media]`), поэтому в HTML обновляются хэши `?v=` у ссылок на эти ассеты; разметка страниц не меняется, пока книга не добавит `current = true` в `index_page.roadmap_steps`.
+
+- **Инверсия изображений в лайтбоксе (`[media]`).** `engine/assets/media.js` копирует класс `md-invert-dark` с исходного `<img>` на изображение в полноэкранном окне (`#md-lightbox-img`) и снимает его при закрытии; `engine/assets/media.css` применяет `filter: invert(1) hue-rotate(180deg)` в тёмных темах как к `.article-markdown img.md-invert-dark`, так и к `.md-lightbox-body img.md-invert-dark`. Тест `test_media_runtime.py` расширен проверкой в headless Firefox.
+- **Текущий шаг дорожной карты (`index_page.roadmap_steps`).** Добавлен необязательный булев ключ `current = true` у элемента `roadmap_steps` (`engine/config.py`, `engine/template.py`) и строка `index.roadmap_current = "Вы здесь"` в `engine/strings/ru.toml`. Карточка с `current = true` получает класс `.roadmap-step.is-current`, атрибут `aria-current="step"`, акцентную рамку со свечением и бейдж `.step-current-badge` (`engine/assets/style.css`). Тесты в `test_config.py`.
+
 ## 1.18.0 (2026-10-22)
 
 Новая возможность: изображения уроков — секция `[media]` в `book.toml` (задание владельца для `emu-textbook`, `Prompt_Engine_Images.md`, этап 1). Несовместимости `book.toml` нет: новая секция, по умолчанию `enabled = false` — прежнее поведение.

@@ -2242,6 +2242,43 @@ tr:hover {
   line-height: 1.5;
 }
 
+.roadmap-step.is-current {
+  border: 2px solid var(--accent);
+  border-top-width: 4px;
+  border-radius: var(--radius-md);
+  background-color: var(--bg-card);
+  background-image: linear-gradient(180deg, var(--accent-subtle-bg) 0%, transparent 100%);
+  padding: 14px 16px 16px;
+  box-shadow: 0 0 0 3px var(--accent-glow), var(--shadow-card);
+}
+
+.step-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin-bottom: 8px;
+}
+
+.step-header .step-badge {
+  margin-bottom: 0;
+}
+
+.step-current-badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 2px 8px;
+  border-radius: 999px;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  color: var(--accent);
+  background-color: var(--accent-subtle-bg);
+  border: 1px solid var(--accent);
+  white-space: nowrap;
+}
+
 /* Адаптивность */
 @media (max-width: 768px) {
   /* Телефон: сайдбар — выдвижная панель на 80% ширины окна. Открывает и закрывает её кнопка в шапке

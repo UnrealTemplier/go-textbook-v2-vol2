@@ -32,11 +32,20 @@ window.addEventListener('load',()=>setTimeout(async()=>{const r={};try{
  r.opened=m.classList.contains('active');r.hidden=m.getAttribute('aria-hidden');
  r.src=view.getAttribute('src');r.counter=counter.textContent;r.caption=cap.textContent.trim();
  r.focusClose=document.activeElement&&document.activeElement.getAttribute('data-action');
+ document.documentElement.dataset.theme='amber';
+ r.viewHasInvert=view.classList.contains('md-invert-dark');
+ r.viewFilters={amber:getComputedStyle(view).filter};
+ document.documentElement.dataset.theme='light';
+ r.viewFilters.light=getComputedStyle(view).filter;
+ document.documentElement.dataset.theme='amber';
+ r.viewFilters.backAmber=getComputedStyle(view).filter;
  const fits=()=>{const b=body.getBoundingClientRect(),v=view.getBoundingClientRect();
    return v.width>0&&v.left>=b.left-1&&v.right<=b.right+1&&v.top>=b.top-1&&v.bottom<=b.bottom+1;};
  r.fit=fits();r.fitWidth=Math.round(view.getBoundingClientRect().width);
  document.dispatchEvent(new KeyboardEvent('keydown',{key:'ArrowRight',bubbles:true}));await sleep(300);
  r.nextSrc=view.getAttribute('src');r.nextCounter=counter.textContent;r.nextCaption=cap.textContent.trim();
+ r.nextViewHasInvert=view.classList.contains('md-invert-dark');
+ r.nextViewFilter=getComputedStyle(view).filter;
  m.querySelector('[data-action="lightbox-fit"]').click();await sleep(50);
  r.naturalWidth=Math.round(parseFloat(view.style.width));
  m.querySelector('[data-action="lightbox-fit"]').click();await sleep(50);r.refit=fits();
@@ -90,11 +99,17 @@ class MediaLightboxRuntimeTest(unittest.TestCase):
         self.assertIn("Процессор и память", r["caption"])
         self.assertIn("Автор: html-textbook-engine", r["caption"])
         self.assertEqual(r["focusClose"], "lightbox-close")
+        self.assertTrue(r["viewHasInvert"])
+        self.assertIn("invert(1)", r["viewFilters"]["amber"])
+        self.assertEqual(r["viewFilters"]["light"], "none")
+        self.assertIn("invert(1)", r["viewFilters"]["backAmber"])
         self.assertTrue(r["fit"])
         self.assertGreater(r["fitWidth"], 560)                     # схема 560 px растянута на окно
         self.assertTrue(r["nextSrc"].endswith("media/sunset.png"), r["nextSrc"])
         self.assertEqual(r["nextCounter"], "2 / 6")
         self.assertIn("Закат над горами", r["nextCaption"])
+        self.assertFalse(r["nextViewHasInvert"])
+        self.assertEqual(r["nextViewFilter"], "none")
         self.assertEqual(r["naturalWidth"], 480)                   # «1:1» — натуральный размер
         self.assertTrue(r["refit"])
         self.assertEqual(r["wrapCounter"], "6 / 6")                # листание по кругу
